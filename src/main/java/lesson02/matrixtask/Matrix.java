@@ -1,4 +1,4 @@
-package lesson2.matrixtask;
+package lesson02.matrixtask;
 
 public class Matrix {
 
