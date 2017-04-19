@@ -1,4 +1,4 @@
-package lesson2;
+package lesson02;
 
 public class InstanceofAndInterface implements Inerface1{
     public static void main(String[] args) {
