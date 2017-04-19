@@ -5,7 +5,7 @@ public class Summator {
     public static Matrix sumTwoMatrices(Matrix matrix1, Matrix matrix2) {
         if (matrix1.getVerticalSize() != matrix2.getVerticalSize()
                 || matrix1.getHorizontalSize() != matrix2.getHorizontalSize()) {
-            throw new NotSameSizeOfMatrices();
+            throw new NotSameSizeOfMatricesException();
         }
 
         Matrix resultMatrix = new Matrix(matrix1.getVerticalSize(), matrix1.getHorizontalSize());

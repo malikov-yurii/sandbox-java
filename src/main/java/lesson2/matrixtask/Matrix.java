@@ -33,15 +33,15 @@ public class Matrix {
     }
 
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int cellWidth = String.valueOf(getHorizontalSize() * getVerticalSize()).length() + 2;
         for (int[] row : arr) {
             for (int element : row) {
-                result += String.format("%" + cellWidth + "d", element);
+                result.append(String.format("%" + cellWidth + "d", element));
             }
-            result += '\n';
+            result.append('\n');
         }
-        return result;
+        return result.toString();
 //        return Arrays.deepToString(arr).replaceAll("\\], \\[", "\\]\n\\[");
     }
 
