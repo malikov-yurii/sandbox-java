@@ -1,5 +1,7 @@
 package lesson04.practice;
 
+import com.sun.org.apache.xpath.internal.functions.WrongNumberArgsException;
+
 /**
  * Created by Malikov on 4/19/2017.
  */
@@ -21,6 +23,10 @@ public class FirstTaskDigitsQuantity {
      */
     public static int countDigitQuantityInNumber(final int digit, int number) {
         int lastDigit, quantity = 0;
+
+        if (digit < 0 || digit > 9){
+            throw new IllegalArgumentException("Provided digit should be [0..9]");
+        }
 
         if (digit == 0 && number == 0) {
             return 1;

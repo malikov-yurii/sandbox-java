@@ -74,131 +74,131 @@ public class ThirdTask {
     }
 
     private static int getYearsToReachSumByRate1(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         while (sum < desiredSum) {
             sum *= 1 + rate / 100;
-            count++;
+            years++;
         }
-        return count;
+        return years;
     }
 
     private static int getYearsToReachSumByRate2(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         if (sum < desiredSum) {
             do {
                 sum *= 1 + rate / 100;
-                count++;
+                years++;
             } while (sum < desiredSum);
         }
-        return count;
+        return years;
     }
 
     private static int getYearsToReachSumByRate3(double sum, double rate, double desiredSum) {
-        int count = 0;
-        for (; sum < desiredSum; count++) {
+        int years = 0;
+        for (; sum < desiredSum; years++) {
             sum *= 1 + rate / 100;
         }
-        return count;
+        return years;
     }
 
     private static int getYearsToReachSumByRate4(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         while (true) {
             if (sum < desiredSum) {
                 sum *= 1 + rate / 100;
             } else {
-                return count;
+                return years;
             }
-            count++;
+            years++;
         }
     }
 
     private static int getYearsToReachSumByRate5(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         do{
             if (sum < desiredSum) {
                 sum *= 1 + rate / 100;
             } else {
-                return count;
+                return years;
             }
-            count++;
+            years++;
         }while (true);
     }
 
     private static int getYearsToReachSumByRate6(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         for(;;) {
             if (sum < desiredSum) {
                 sum *= 1 + rate / 100;
             } else {
-                return count;
+                return years;
             }
-            count++;
+            years++;
         }
     }
 
     private static int getYearsToReachSumByRate7(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         while (true) {
             if (sum < desiredSum) {
                 sum *= 1 + rate / 100;
             } else {
                 break;
             }
-            count++;
+            years++;
         }
-        return count;
+        return years;
     }
 
     private static int getYearsToReachSumByRate8(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         label:
         while (true) {
             if (sum >= desiredSum) {
                 break label;
             }
             sum *= 1 + rate / 100;
-            count++;
+            years++;
         }
-        return count;
+        return years;
     }
 
     private static int getYearsToReachSumByRate9(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         label:
         do{
             if (sum >= desiredSum) {
                 break label;
             }
             sum *= 1 + rate / 100;
-            count++;
+            years++;
         }while (true);
-        return count;
+        return years;
     }
 
     private static int getYearsToReachSumByRate10(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         label:
         for(;;) {
             if (sum >= desiredSum) {
                 break label;
             }
             sum *= 1 + rate / 100;
-            count++;
+            years++;
         }
-        return count;
+        return years;
     }
 
     private static void getYearsToReachSumByRate11(double sum, double rate, double desiredSum) {
-        int count = 0;
+        int years = 0;
         while (true) {
             if (sum < desiredSum) {
                 sum *= 1 + rate / 100;
             } else {
-                System.out.println("count in method11() = " + count);
+                System.out.println("years in method11() = " + years);
                 System.exit(0);
             }
-            count++;
+            years++;
         }
     }
 
