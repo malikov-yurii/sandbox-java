@@ -1,7 +1,5 @@
 package lesson04.practice;
 
-import com.sun.org.apache.xpath.internal.functions.WrongNumberArgsException;
-
 /**
  * Created by Malikov on 4/19/2017.
  */
@@ -12,8 +10,8 @@ public class FirstTaskDigitsQuantity {
                 "0 in 0 occurs " + countDigitQuantityInNumber(0, 0) + " times\n"
                 + "0 in 700 occurs " + countDigitQuantityInNumber(0, 700) + " times\n"
                 + "7 in 7 occurs " + countDigitQuantityInNumber(7, 7) + " times\n"
-                + "7 in 17 occurs " + countDigitQuantityInNumber(7, 17) + " times\n"
-                + "7 in 770 occurs " +countDigitQuantityInNumber(7, 770) + " times\n");
+                + "7 in 17 occurs " + countDigitQuantityInNumber(7, -17) + " times\n"
+                + "7 in -770 occurs " +countDigitQuantityInNumber(7, -770) + " times\n");
     }
 
     /**
@@ -30,6 +28,10 @@ public class FirstTaskDigitsQuantity {
 
         if (digit == 0 && number == 0) {
             return 1;
+        }
+
+        if (number < 0){
+            number *= -1;
         }
 
         do{

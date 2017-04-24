@@ -1,16 +1,16 @@
 package lesson04.practice;
 
 /**
- * Created by Malikov on 4/20/2017.
+ * @author Yurii Malikov
  */
 public class FourthTask {
-    public static void main(String[] args) {
-        System.out.println("Table A:\n" + printTableAFor(5)
-                + "\nTableB:\n" + printTableB(5));
 
+    public static void main(String[] args) {
+        System.out.println("Left table :\n" + printLeftTableFor(9)
+                + "\nRight table:\n" + printRightTableFor(9));
     }
 
-    private static String printTableAFor(int rowQuantity) {
+    private static String printLeftTableFor(int rowQuantity) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < rowQuantity ; i++) {
             for (int j = i; j >= 0 ; j--) {
@@ -21,14 +21,11 @@ public class FourthTask {
         return result.toString();
     }
 
-    private static String printTableB(int rowQuantity) {
+    private static String printRightTableFor(int rowQuantity) {
         StringBuilder result = new StringBuilder();
         for (int i = 1; i <= rowQuantity ; i++) {
-            for (int j = rowQuantity; j > i ; j--) {
-                result.append("  ");
-            }
-            for (int k = i; k >= 1 ; k--) {
-                result.append(k).append(' ');
+            for (int j = rowQuantity; j > 0; j--) {
+                result.append(j > i ? "  " : (j + " "));
             }
             result.append('\n');
         }

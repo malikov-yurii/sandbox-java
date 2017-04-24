@@ -4,6 +4,7 @@ package lesson04.practice;
  * Created by Malikov on 4/20/2017.
  */
 public class ThirdTask {
+
     public static void main(String[] args) {
         System.out.println(
                 "method getYearsToReachSumByRate1 :\n"
@@ -191,6 +192,7 @@ public class ThirdTask {
 
     private static void getYearsToReachSumByRate11(double sum, double rate, double desiredSum) {
         int years = 0;
+
         while (true) {
             if (sum < desiredSum) {
                 sum *= 1 + rate / 100;
@@ -200,6 +202,7 @@ public class ThirdTask {
             }
             years++;
         }
+
     }
 
 }
