@@ -1,4 +1,4 @@
-package lesson07.homework07;
+package lesson07.practice07;
 
 /**
  * @author Yurii Malikov

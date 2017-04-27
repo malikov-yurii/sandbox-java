@@ -1,4 +1,4 @@
-package lesson07.homework07;
+package lesson07.practice07;
 
 /**
  * @author Yurii Malikov
@@ -86,7 +86,7 @@ public class Array<T extends Number> {
                         )
                 );
             } catch (Exception e) {
-                throw new RuntimeException("method invokation failed", e);
+                throw new RuntimeException("method invocation failed", e);
             }
         }
         return resultArray;
@@ -95,11 +95,14 @@ public class Array<T extends Number> {
     private Class getResultClass(Class thisClass, Class argumentClass) {
         if (thisClass.equals(Double.class) || argumentClass.equals(Double.class))
             return Double.class;
+
         if (thisClass.equals(Long.class) || argumentClass.equals(Long.class))
             return Long.class;
+
         if ((thisClass.equals(Integer.class) || thisClass.equals(Short.class) || thisClass.equals(Byte.class))
                 && (thisClass.equals(Integer.class) || thisClass.equals(Short.class) || thisClass.equals(Byte.class)))
             return Integer.class;
+
         return Double.class;
     }
 
@@ -136,6 +139,7 @@ public class Array<T extends Number> {
                 throw new RuntimeException("method invokation failed", e);
             }
         }
+
         return result;
 //        return Arrays.hashCode(arr);
     }
@@ -151,6 +155,7 @@ public class Array<T extends Number> {
         for (int i = 1; i < arr.length; i++) {
             result.append(' ').append(arr[i]);
         }
+
         return result.toString();
     }
 }
