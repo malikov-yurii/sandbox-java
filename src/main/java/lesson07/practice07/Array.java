@@ -1,11 +1,14 @@
 package lesson07.practice07;
 
+import java.util.Iterator;
+
 /**
  * @author Yurii Malikov
  */
-public class Array<T extends Number> {
+public class Array<T extends Number> implements Iterable<T>{
 
     private Number[] arr;
+
 
     private Array(int size) {
         arr = new Number[size];
@@ -15,25 +18,19 @@ public class Array<T extends Number> {
         this.arr = arr;
     }
 
-    public static <T extends Number> Array<T> create(int size) {
+
+    public static <T extends Number> Array<T> of(int size) {
         if (size < 0)
             throw new IllegalArgumentException("Size of Array object should be greater than -1");
         return new Array<T>(size);
     }
 
-    public static <T extends Number> Array<T> create(T[] arr) {
+    public static <T extends Number> Array<T> of(T[] arr) {
         return new Array<T>(arr);
     }
 
-    public int size() {
-        return arr.length;
-    }
 
-    public Class getElementClass() {
-        ensureHasElements();
-        return arr[0].getClass();
-    }
-
+    @SuppressWarnings("unchecked")
     public T get(int index) {
         rangeCheck(index);
         return (T) arr[index];
@@ -44,118 +41,90 @@ public class Array<T extends Number> {
         arr[index] = newValue;
     }
 
+    public int size() {
+        ensureHasElements();
+        return arr.length;
+    }
+
+
+    public Class getGenericClass() {
+        ensureHasElements();
+        return arr[0].getClass();
+    }
+
     private void ensureHasElements() {
         if (arr == null || arr.length == 0) {
-            throw new RuntimeException("Array has no elements");
+            throw new NullPointerException("Array has not been initialized by data yet.");
         }
     }
 
     private void rangeCheck(int index) {
-        if (index >= arr.length || index < 0)
-            throw new IndexOutOfBoundsException("Index: " + index + ", Array length: " + arr.length);
+        if (index >= size() || index < 0)
+            throw new IndexOutOfBoundsException("Index: " + index + ", Array length: " + size());
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private int cursor = 0;
 
-    public Array add(Array argumentArray) {
-        return performOperationTO("sum", argumentArray);
-    }
-
-    public Array subtract(Array argumentArray) {
-        return performOperationTO("subtract", argumentArray);
-    }
-
-    public Array multiply(Array argumentArray) {
-        return performOperationTO("multiply", argumentArray);
-    }
-
-    private Array performOperationTO(String operationName, Array argumentArray) {
-        Class resultClass = getResultClass(arr[0].getClass(), argumentArray.getElementClass());
-        Array resultArray = create((Number[]) java.lang.reflect.Array.newInstance(resultClass, arr.length));
-        String prefix = resultClass.equals(Integer.class) ? "Int" : resultClass.getSimpleName();
-        String prefixLowerCase = prefix.toLowerCase();
-
-        Class noParams[] = {};
-        Class operationParams[] = {resultClass, resultClass};
-
-        for (int i = 0; i < resultArray.size(); i++) {
-            try {
-                resultArray.set(i, (Number)
-                        MathUtils.class.getMethod(operationName + prefix + 's', operationParams).invoke(null,
-                                getElementClass().getDeclaredMethod(prefixLowerCase + "Value", noParams).invoke(arr[i], null),
-                                argumentArray.getElementClass().getDeclaredMethod(prefixLowerCase + "Value", noParams).invoke(argumentArray.get(i), null)
-                        )
-                );
-            } catch (Exception e) {
-                throw new RuntimeException("method invocation failed", e);
+            @Override
+            public boolean hasNext() {
+                return cursor < size();
             }
-        }
-        return resultArray;
-    }
 
-    private Class getResultClass(Class thisClass, Class argumentClass) {
-        if (thisClass.equals(Double.class) || argumentClass.equals(Double.class))
-            return Double.class;
-
-        if (thisClass.equals(Long.class) || argumentClass.equals(Long.class))
-            return Long.class;
-
-        if ((thisClass.equals(Integer.class) || thisClass.equals(Short.class) || thisClass.equals(Byte.class))
-                && (thisClass.equals(Integer.class) || thisClass.equals(Short.class) || thisClass.equals(Byte.class)))
-            return Integer.class;
-
-        return Double.class;
-    }
-
-    public void print() {
-        System.out.println(this);
+            @Override
+            public T next() {
+                return get(cursor++);
+            }
+        };
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
 
         Array<?> array = (Array<?>) o;
-        if (array.size() != arr.length) return false;
+
+        if (array.size() != size()) return false;
 
         boolean result = true;
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < size(); i++) {
             result &= arr[i].equals(array.get(i));
         }
 
         return result;
-//        return Arrays.equals(arr, array.arr);
     }
-
-    private Class noParams[] = {};
 
     @Override
     public int hashCode() {
-        Integer result = 17;
-        for (Number element : arr){
-            try {
-                result = 31 * result + (Integer) getElementClass().getDeclaredMethod("hasCode()", noParams).invoke(element, null);
-            } catch (Exception e) {
-                throw new RuntimeException("method invokation failed", e);
-            }
-        }
+        if (arr == null)
+            return 0;
 
-        return result;
-//        return Arrays.hashCode(arr);
+        int hashCode = super.hashCode();
+
+        for (T element : this)
+            hashCode = 31 * hashCode + (element == null ? 0 : element.hashCode());
+
+        return hashCode;
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        if (arr != null && arr.length != 0) {
-            result.append(arr[0]);
+
+        if (arr != null && size() != 0) {
+            result.append("Array<").append(getGenericClass().getSimpleName()).append(">{").append(arr[0]);
         } else {
             System.out.println("Array has not been initialized or has zero length.");
         }
-        for (int i = 1; i < arr.length; i++) {
-            result.append(' ').append(arr[i]);
+
+        for (int i = 1; i < size(); i++) {
+            result.append(", ").append(arr[i]);
         }
 
-        return result.toString();
+        return result.append('}').toString();
     }
 }

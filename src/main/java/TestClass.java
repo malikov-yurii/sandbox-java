@@ -1,7 +1,10 @@
 public class TestClass{
     public static void main(String[] args) {
 
-        Number number;
+        Number number = (new Long((short)34) * new Float(2));
+        System.out.println(number.getClass());
+
+
 //        number = new Short((short)8) * new Long((byte)5) ;
 
 //        System.out.println(number.getClass().getSimpleName());
