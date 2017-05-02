@@ -10,18 +10,18 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class ArraysUtils {
 
-    public static Array add(Array firstArray, Array secondArray) {
-        ensureNotNullAndHaveSameSizes(firstArray, secondArray);
+    public static Array sum(Array<? extends Number> firstArray, Array<? extends Number> secondArray) {
+        ensureSameSizeNumberArraysInitialized(firstArray, secondArray);
         return perform(firstArray, "sum", secondArray);
     }
 
-    public static Array subtract(Array firstArray, Array secondArray) {
-        ensureNotNullAndHaveSameSizes(firstArray, secondArray);
+    public static Array subtract(Array<? extends Number> firstArray, Array<? extends Number> secondArray) {
+        ensureSameSizeNumberArraysInitialized(firstArray, secondArray);
         return perform(firstArray, "subtract", secondArray);
     }
 
-    public static Array multiply(Array firstArray, Array secondArray) {
-        ensureNotNullAndHaveSameSizes(firstArray, secondArray);
+    public static Array multiply(Array<? extends Number> firstArray, Array<? extends Number> secondArray) {
+        ensureSameSizeNumberArraysInitialized(firstArray, secondArray);
         return perform(firstArray, "multiply", secondArray);
     }
 
@@ -30,14 +30,14 @@ public class ArraysUtils {
     }
 
     @SuppressWarnings("unchecked")
-    private static Array perform(Array firstArray, String operationName, Array secondArray) {
+    private static Array perform(Array<? extends Number> firstArray, String operationName, Array<? extends Number> secondArray) {
         Class resultClass = getResultClass(firstArray.getGenericClass(), secondArray.getGenericClass());
         Array resultArray = Array.of((Number[]) java.lang.reflect.Array.newInstance(resultClass, firstArray.size()));
         String prefix = resultClass.equals(Integer.class) ? "int" : resultClass.getSimpleName().toLowerCase();
 
         for (int i = 0; i < resultArray.size(); i++) {
             try {
-                resultArray.set(i, (Number) NumbersUtils.class.getMethod(operationName, Number.class, Number.class).invoke(null,
+                resultArray.set(i, NumbersUtils.class.getMethod(operationName, Number.class, Number.class).invoke(null,
                         firstArray.getGenericClass().getDeclaredMethod(prefix + "Value").invoke(firstArray.get(i)),
                         secondArray.getGenericClass().getDeclaredMethod(prefix + "Value").invoke(secondArray.get(i))));
             } catch (Exception e) {
@@ -65,13 +65,32 @@ public class ArraysUtils {
         return Integer.class;
     }
 
-    private static void ensureNotNullAndHaveSameSizes(Array firstArray, Array secondArray) {
-        if (firstArray == null || secondArray == null) {
-            throw new NullPointerException("One of arguments (Array.class) was not initialized.");
-        }
+    private static void ensureSameSizeNumberArraysInitialized(Array firstArray, Array secondArray) {
+        ensureArrayIsInitialized(firstArray);
+        ensureArrayIsInitialized(secondArray);
 
+        ensureIsNumberArray(firstArray);
+        ensureIsNumberArray(secondArray);
+
+        ensureArraySizesAreEqual(firstArray, secondArray);
+    }
+
+    private static void ensureIsNumberArray(Array array) {
+        if (!(array.get(0) instanceof Number)) {
+            throw new IllegalArgumentException(array + " method argument is not array of numbers");
+        }
+    }
+
+    private static void ensureArraySizesAreEqual(Array firstArray, Array secondArray) {
         if (firstArray.size() != secondArray.size()) {
             throw new IllegalArgumentException("Provided arrays have not same sizes");
         }
     }
+
+    private static void ensureArrayIsInitialized(Array array) {
+        if (array == null || array.size() == 0) {
+            throw new NullPointerException("Array method has not been initialized.");
+        }
+    }
+
 }

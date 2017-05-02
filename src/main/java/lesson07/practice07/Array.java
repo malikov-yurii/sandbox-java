@@ -5,13 +5,13 @@ import java.util.Iterator;
 /**
  * @author Yurii Malikov
  */
-public class Array<T extends Number> implements Iterable<T>{
+public class Array<T> implements Iterable<T>{
 
-    private Number[] arr;
+    private Object[] arr;
 
 
     private Array(int size) {
-        arr = new Number[size];
+        arr = new Object[size];
     }
 
     private Array(T[] arr) {
@@ -19,13 +19,14 @@ public class Array<T extends Number> implements Iterable<T>{
     }
 
 
-    public static <T extends Number> Array<T> of(int size) {
-        if (size < 0)
-            throw new IllegalArgumentException("Size of Array object should be greater than -1");
+    public static <T> Array<T> of(int size) {
+        if (size < 1)
+            throw new IllegalArgumentException("Size of Array object should be greater than 0");
         return new Array<T>(size);
     }
 
-    public static <T extends Number> Array<T> of(T[] arr) {
+    @SafeVarargs
+    public static <T> Array<T> of(T... arr) {
         return new Array<T>(arr);
     }
 
@@ -54,7 +55,7 @@ public class Array<T extends Number> implements Iterable<T>{
 
     private void ensureHasElements() {
         if (arr == null || arr.length == 0) {
-            throw new NullPointerException("Array has not been initialized by data yet.");
+            throw new NullPointerException("Array has not been initialized with data yet.");
         }
     }
 

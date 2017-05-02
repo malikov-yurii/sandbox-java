@@ -12,26 +12,38 @@ public class Runner {
 
 //      initialize test data
 
-        Array<Integer> firstIntegerArray = Array.of(new Integer[]{1, 2, 3, 4});
-        Array secondIntegerArray = Array.of(new Integer[]{2, 2, 2, 2});
+        Array<Integer> firstIntegerArray = Array.of(1, 2, 3, 4);
+        Array<Integer> secondIntegerArray = Array.of(2, 2, 2, 2);
 
-        Array firstLongArray = Array.of(new Long[]{1L, 2L, 3L, 4L});
-        Array secondLongArray = Array.of(new Long[]{3L, 3L, 3L, 3L});
+        Array<Long> firstLongArray = Array.of(1L, 2L, 3L, 4L);
+        Array<Long> secondLongArray = Array.of(3L, 3L, 3L, 3L);
 
-        Array firstDoubleArray = Array.of(new Double[]{1d, 2d, 3d, 444d});
-        Array firstDoubleArrayClone = Array.of(new Double[]{1d, 2d, 3d, 444d});
-        Array secondDoubleArray = Array.of(new Double[]{4d, 5d, 5d, 5d});
+        Array<Double> firstDoubleArray = Array.of(1d, 2d, 3d, 444d);
+        Array<Double> firstDoubleArrayClone = Array.of(1d, 2d, 3d, 444d);
+        Array<Double> secondDoubleArray = Array.of(4d, 5d, 5d, 5d);
 
-        Array atomicIntegerArray = Array.of(new AtomicInteger[]{new AtomicInteger(1),
-                new AtomicInteger(2), new AtomicInteger(2), new AtomicInteger(2)});
+        Array<AtomicInteger> atomicIntegerArray = Array.of(new AtomicInteger(1),
+                new AtomicInteger(2), new AtomicInteger(2), new AtomicInteger(2));
 
-        Array bigIntegerArray = Array.of(new BigInteger[]{new BigInteger("1"), new BigInteger("2"),
-                new BigInteger("3"), new BigInteger("4")});
+        Array<BigInteger> bigIntegerArray = Array.of(new BigInteger("1"), new BigInteger("2"),
+                new BigInteger("3"), new BigInteger("4"));
+
+/*
+        Array stringArray = Array.of("1", "2", "oops", "3i");
+        System.out.println(ArraysUtils.sum(firstIntegerArray, stringArray));
+
+        Array<String> stringArray = Array.of("1", "2", "oops", "3i");
+        System.out.println(ArraysUtils.sum(firstIntegerArray, stringArray));
+
+        Array<String> firstMixedArray = Array.of("1", "2", "oops", 3);
+        Array<String> typeMismatchArray = Array.of(1L, 3L);
+*/
+
 
 //      tests
 
-        System.out.println("test ArraysUtils.print(Array.of(new Integer[]{11, 22, 33, 44})):");
-        ArraysUtils.print(Array.of(new Integer[]{11, 22, 33, 44}));
+        System.out.println("test ArraysUtils.print(Array.of(11, 22, 33, 44)):");
+        ArraysUtils.print(Array.of(11, 22, 33, 44));
 
         System.out.println(
                 "\ntest equals():"
@@ -45,15 +57,15 @@ public class Runner {
                         + "\nfirstIntegerArray.hashCode() = " + firstIntegerArray.hashCode()
                         + "\nfirstLongArray.hashCode() = " + firstLongArray.hashCode()
 
-                        + "\n\ntest ArraysUtils.add(firstArray, secondArray):"
-                        + "\nArraysUtils.add(" + firstIntegerArray + ", " + secondIntegerArray + ") = " + ArraysUtils.add(firstIntegerArray, secondIntegerArray)
-                        + "\nArraysUtils.add(" + firstLongArray + ", " + secondLongArray + ") = " + ArraysUtils.add(firstLongArray, secondLongArray)
-                        + "\nArraysUtils.add(" + firstDoubleArray + ", " + secondDoubleArray + ") = " + ArraysUtils.add(firstDoubleArray, secondDoubleArray)
-                        + "\nArraysUtils.add(" + firstIntegerArray + ", " + secondDoubleArray + ") = " + ArraysUtils.add(firstIntegerArray, secondDoubleArray)
-                        + "\nArraysUtils.add(" + firstLongArray + ", " + secondDoubleArray + ") = " + ArraysUtils.add(firstLongArray, secondDoubleArray)
-                        + "\nArraysUtils.add(" + firstIntegerArray + ", " + secondLongArray + ") = " + ArraysUtils.add(firstIntegerArray, secondLongArray)
-                        + "\nArraysUtils.add(" + atomicIntegerArray + ", " + secondLongArray + ") = " + ArraysUtils.add(atomicIntegerArray, secondLongArray)
-                        + "\nArraysUtils.add(" + bigIntegerArray + ", " + secondLongArray + ") = " + ArraysUtils.add(bigIntegerArray, secondLongArray)
+                        + "\n\ntest ArraysUtils.sum(firstArray, secondArray):"
+                        + "\nArraysUtils.sum(" + firstIntegerArray + ", " + secondIntegerArray + ") = " + ArraysUtils.sum(firstIntegerArray, secondIntegerArray)
+                        + "\nArraysUtils.sum(" + firstLongArray + ", " + secondLongArray + ") = " + ArraysUtils.sum(firstLongArray, secondLongArray)
+                        + "\nArraysUtils.sum(" + firstDoubleArray + ", " + secondDoubleArray + ") = " + ArraysUtils.sum(firstDoubleArray, secondDoubleArray)
+                        + "\nArraysUtils.sum(" + firstIntegerArray + ", " + secondDoubleArray + ") = " + ArraysUtils.sum(firstIntegerArray, secondDoubleArray)
+                        + "\nArraysUtils.sum(" + firstLongArray + ", " + secondDoubleArray + ") = " + ArraysUtils.sum(firstLongArray, secondDoubleArray)
+                        + "\nArraysUtils.sum(" + firstIntegerArray + ", " + secondLongArray + ") = " + ArraysUtils.sum(firstIntegerArray, secondLongArray)
+                        + "\nArraysUtils.sum(" + atomicIntegerArray + ", " + secondLongArray + ") = " + ArraysUtils.sum(atomicIntegerArray, secondLongArray)
+                        + "\nArraysUtils.sum(" + bigIntegerArray + ", " + secondLongArray + ") = " + ArraysUtils.sum(bigIntegerArray, secondLongArray)
 
                         + "\n\ntest ArraysUtils.subtract(firstArray, secondArray):"
                         + "\nArraysUtils.subtract(" + firstIntegerArray + ", " + secondIntegerArray + ") = " + ArraysUtils.subtract(firstIntegerArray, secondIntegerArray)
