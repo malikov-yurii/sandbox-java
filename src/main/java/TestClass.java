@@ -1,8 +1,8 @@
 public class TestClass{
     public static void main(String[] args) {
 
-        Number number = (new Long((short)34) * new Float(2));
-        System.out.println(number.getClass());
+
+        System.out.println(new Integer[0].length);
 
 
 //        number = new Short((short)8) * new Long((byte)5) ;

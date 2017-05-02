@@ -31,15 +31,15 @@ public class ArraysUtils {
 
     @SuppressWarnings("unchecked")
     private static Array perform(Array<? extends Number> firstArray, String operationName, Array<? extends Number> secondArray) {
-        Class resultClass = getResultClass(firstArray.getGenericClass(), secondArray.getGenericClass());
+        Class resultClass = getResultClass(firstArray.getComponentType(), secondArray.getComponentType());
         Array resultArray = Array.of((Number[]) java.lang.reflect.Array.newInstance(resultClass, firstArray.size()));
         String prefix = resultClass.equals(Integer.class) ? "int" : resultClass.getSimpleName().toLowerCase();
 
         for (int i = 0; i < resultArray.size(); i++) {
             try {
                 resultArray.set(i, NumbersUtils.class.getMethod(operationName, Number.class, Number.class).invoke(null,
-                        firstArray.getGenericClass().getDeclaredMethod(prefix + "Value").invoke(firstArray.get(i)),
-                        secondArray.getGenericClass().getDeclaredMethod(prefix + "Value").invoke(secondArray.get(i))));
+                        firstArray.getComponentType().getDeclaredMethod(prefix + "Value").invoke(firstArray.get(i)),
+                        secondArray.getComponentType().getDeclaredMethod(prefix + "Value").invoke(secondArray.get(i))));
             } catch (Exception e) {
                 throw new RuntimeException("method invocation failed", e);
             }

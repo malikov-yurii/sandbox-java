@@ -39,14 +39,15 @@ public class Runner {
         Array<String> typeMismatchArray = Array.of(1L, 3L);
 */
 
-
 //      tests
 
         System.out.println("test ArraysUtils.print(Array.of(11, 22, 33, 44)):");
         ArraysUtils.print(Array.of(11, 22, 33, 44));
 
         System.out.println(
-                "\ntest equals():"
+                "\nArray.createEmptyArraySize(3, String.class) : \n"
+                        + Array.createEmptyArraySize(3, String.class)
+                        + "\n\ntest equals():"
                         + "\nfirstDoubleArray.equals(firstDoubleArrayClone) = " + firstDoubleArray.equals(firstDoubleArrayClone)
                         + "\nfirstDoubleArray.equals(secondDoubleArray) = " + firstDoubleArray.equals(secondDoubleArray)
 

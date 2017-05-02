@@ -1,6 +1,7 @@
 package lesson07.practice07;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * @author Yurii Malikov
@@ -9,20 +10,25 @@ public class Array<T> implements Iterable<T>{
 
     private Object[] arr;
 
+    private Class<T> componentType;
 
-    private Array(int size) {
+
+    private Array(int size, Class<T> componentType) {
         arr = new Object[size];
+        this.componentType = componentType;
     }
 
+    @SuppressWarnings("unchecked")
     private Array(T[] arr) {
         this.arr = arr;
+        componentType = (Class<T>) arr.getClass().getComponentType();
     }
 
 
-    public static <T> Array<T> of(int size) {
-        if (size < 1)
-            throw new IllegalArgumentException("Size of Array object should be greater than 0");
-        return new Array<T>(size);
+    public static <T> Array<T> createEmptyArraySize(int size, Class<T> componentType) {
+        if (size < 0)
+            throw new IllegalArgumentException("Size of Array object should be not less than 0");
+        return new Array<>(size, componentType);
     }
 
     @SafeVarargs
@@ -43,20 +49,12 @@ public class Array<T> implements Iterable<T>{
     }
 
     public int size() {
-        ensureHasElements();
+        Objects.requireNonNull(arr, "Array has not been initialized");
         return arr.length;
     }
 
-
-    public Class getGenericClass() {
-        ensureHasElements();
-        return arr[0].getClass();
-    }
-
-    private void ensureHasElements() {
-        if (arr == null || arr.length == 0) {
-            throw new NullPointerException("Array has not been initialized with data yet.");
-        }
+    public Class getComponentType() {
+        return componentType;
     }
 
     private void rangeCheck(int index) {
@@ -67,6 +65,7 @@ public class Array<T> implements Iterable<T>{
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+
             private int cursor = 0;
 
             @Override
@@ -78,6 +77,7 @@ public class Array<T> implements Iterable<T>{
             public T next() {
                 return get(cursor++);
             }
+
         };
     }
 
@@ -116,14 +116,17 @@ public class Array<T> implements Iterable<T>{
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        if (arr != null && size() != 0) {
-            result.append("Array<").append(getGenericClass().getSimpleName()).append(">{").append(arr[0]);
+        if (arr != null && arr.length != 0) {
+            result.append("Array<")
+                    .append(getComponentType().getSimpleName())
+                    .append(">{")
+                    .append(arr[0] == null ? "NULL" : arr[0]);
         } else {
-            System.out.println("Array has not been initialized or has zero length.");
+            return "Empty array";
         }
 
         for (int i = 1; i < size(); i++) {
-            result.append(", ").append(arr[i]);
+            result.append(", ").append(arr[i] == null ? "NULL" : arr[i]);
         }
 
         return result.append('}').toString();
