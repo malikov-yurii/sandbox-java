@@ -30,7 +30,8 @@ public class StreamCollectorsReduceParallelism {
         out.close();
 
         Stream<String> streamFromFiles = Files.lines(Paths.get(file.getAbsolutePath()));
-        System.out.println("streamFromFiles = " + streamFromFiles.collect(Collectors.toList()) + "; Stream implementation: " + streamFromFiles.getClass().getName());
+        System.out.println("streamFromFiles = " + streamFromFiles.collect(Collectors.toList()) + "; " +
+                "Stream implementation: " + streamFromFiles.getClass().getName());
     /*  Console output:
         streamFromFiles = [Vive la France, Slava Ukraini, God bless America]; Stream implementation: java.util.stream.ReferencePipeline$Head
     */
@@ -53,6 +54,16 @@ public class StreamCollectorsReduceParallelism {
         age 20: [Andrew]
         age 23: [Igor, Ira]
         age 12: [Vitia]
+    */
+
+        Map<Boolean, Integer> programmersAndNonProgrammersAgeSum = persons.stream()
+                .collect(Collectors.groupingBy(Person::isProgrammer, Collectors.summingInt(Person::getAge)));
+
+        programmersAndNonProgrammersAgeSum
+                .forEach((isProgrammer, ageSum) -> System.out.format("isProgrammer=%b  :  ageSum=%d\n", isProgrammer, ageSum));
+    /*  Console output:
+        isProgrammer=false  :  ageSum=12
+        isProgrammer=true   :  ageSum=66
     */
 
         // Example 13
@@ -153,7 +164,8 @@ public class StreamCollectorsReduceParallelism {
                                     return sum1 + sum2;
                                 })
         );
-    /*  accumulator: sum=0; person=Ira [main]
+    /*  Console output:
+        accumulator: sum=0; person=Ira [main]
         accumulator: sum=0; person=Andrew [ForkJoinPool.commonPool-worker-2]
         accumulator: sum=0; person=Vitia [ForkJoinPool.commonPool-worker-3]
         accumulator: sum=0; person=Igor [ForkJoinPool.commonPool-worker-1]
@@ -164,9 +176,6 @@ public class StreamCollectorsReduceParallelism {
     */
 
         // ********************* Streams and parallelism *******************************
-
-        ForkJoinPool commonPool = ForkJoinPool.commonPool();
-        System.out.println(commonPool.getParallelism());
 
         // Example 22
         //List sortedList =
@@ -190,7 +199,8 @@ public class StreamCollectorsReduceParallelism {
                 .forEach(s -> System.out.format("forEach: %s [%s]\n",s, Thread.currentThread().getName()));
                 //.collect(Collectors.toList());
         //System.out.println(sortedList);
-        /*  filter: d1 [main]
+        /*  Console output:
+            filter: d1 [main]
             map: d1 [main]
             filter: c1 [ForkJoinPool.commonPool-worker-1]
             map: c1 [ForkJoinPool.commonPool-worker-1]
@@ -209,6 +219,31 @@ public class StreamCollectorsReduceParallelism {
             forEach: A1 [ForkJoinPool.commonPool-worker-3]
         */
 
+        // Example 23
+        ForkJoinPool commonPool = ForkJoinPool.commonPool();
+        System.out.println(commonPool.getParallelism());
+        /*  Console output:
+            3
+        */
+
+        long startTime = System.currentTimeMillis();
+        StreamUtil.countPrimes(50000);
+        long endTime = System.currentTimeMillis();
+
+        System.out.println(endTime - startTime);
+        /*  Console output:
+            154
+        */
+
+        startTime = System.currentTimeMillis();
+        StreamUtil.parallelCountPrimes(50000);
+        endTime = System.currentTimeMillis();
+        System.out.println(endTime - startTime);
+        /*  Console output:
+            45
+        */
+
+        // https://dzone.com/articles/think-twice-using-java-8 Think Twice Before Using Java 8 Parallel Streams
 
     }
 
