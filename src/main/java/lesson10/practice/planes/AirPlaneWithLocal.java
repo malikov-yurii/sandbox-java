@@ -5,6 +5,15 @@ package lesson10.practice.planes;
  */
 public class AirPlaneWithLocal {
 
+    private String model;
+
+    private IEngine airPlaneEngine;
+
+    public AirPlaneWithLocal(String model) {
+        this.model = model;
+        airPlaneEngine = getLocalEngine();
+    }
+
     public IEngine getLocalEngine() {
 
         class AirPlaneEngine implements IEngine {
@@ -50,20 +59,11 @@ public class AirPlaneWithLocal {
         return new AirPlaneEngine(this);
     }
 
-    private String model;
-
-    private IEngine airPlaneEngine;
-
-    public AirPlaneWithLocal(String model) {
-        this.model = model;
-        airPlaneEngine = getLocalEngine();
-    }
-
     public String activateAllSystems() {
         StringBuilder result = new StringBuilder();
         /*
             Some code activating other systems.
-            foreach result.append(airPlaneConditioning.stop()
+            For instance, result.append(airPlaneConditioning.stop()
         */
         return result.append(airPlaneEngine.start()).toString();
     }
@@ -72,7 +72,7 @@ public class AirPlaneWithLocal {
         StringBuilder result = new StringBuilder();
         /*
             Some code deactivating other systems.
-            foreach result.append(airPlaneConditioning.start()
+            For instance, result.append(airPlaneConditioning.start()
         */
         return result.append(airPlaneEngine.stop()).toString();
     }

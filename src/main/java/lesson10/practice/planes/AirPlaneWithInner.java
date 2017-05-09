@@ -5,7 +5,7 @@ package lesson10.practice.planes;
  */
 public class AirPlaneWithInner {
 
-    private class AirPlaneEngine implements IEngine{
+    private class AirPlaneEngine implements IEngine {
 
         private class Engine {
 
@@ -32,7 +32,7 @@ public class AirPlaneWithInner {
                 return model + " engine is already active";
             }
             engine.setActive(true);
-            return model +" engine is activated";
+            return model + " engine is activated";
         }
 
         @Override
@@ -54,20 +54,20 @@ public class AirPlaneWithInner {
         this.model = model;
     }
 
-    public String activateAllSystems(){
+    public String activateAllSystems() {
         StringBuilder result = new StringBuilder();
         /*
             Some code activating other systems.
-            foreach result.append(airPlaneConditioning.stop()
+            For instance, result.append(airPlaneConditioning.stop()
         */
         return result.append(airPlaneEngine.start()).toString();
     }
 
-    public String deactivateAllSystems(){
+    public String deactivateAllSystems() {
         StringBuilder result = new StringBuilder();
         /*
             Some code deactivating other systems.
-            foreach result.append(airPlaneConditioning.start()
+            For instance, result.append(airPlaneConditioning.start()
         */
         return result.append(airPlaneEngine.stop()).toString();
     }

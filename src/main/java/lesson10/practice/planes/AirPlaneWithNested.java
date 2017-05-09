@@ -73,7 +73,7 @@ public class AirPlaneWithNested {
         StringBuilder result = new StringBuilder();
       /*
         Some code activating other systems.
-        foreach result.append(airPlaneConditioning.stop()
+        For instance, result.append(airPlaneConditioning.stop()
       */
         return result.append(airPlaneEngine.start()).toString();
     }
@@ -82,7 +82,7 @@ public class AirPlaneWithNested {
         StringBuilder result = new StringBuilder();
       /*
         Some code deactivating other systems.
-        foreach result.append(airPlaneConditioning.start()
+        For instance, result.append(airPlaneConditioning.start()
       */
         return result.append(airPlaneEngine.stop()).toString();
     }
@@ -94,5 +94,5 @@ public class AirPlaneWithNested {
     private static String getWordPlane() {
         return "Plane";
     }
-    
+
 }

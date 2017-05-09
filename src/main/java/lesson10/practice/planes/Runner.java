@@ -32,6 +32,5 @@ public class Runner {
                         + "\n" + airPlaneWithLocal.activateAllSystems()
                         + "\n" + airPlaneWithLocal.deactivateAllSystems()
         );
-
     }
 }

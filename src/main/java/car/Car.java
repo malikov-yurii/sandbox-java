@@ -58,7 +58,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "\nCar{" +
+        return "\nMotorcycle{" +
                 "id=" + id +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +

@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
  */
 public class StringUtils {
 
-    public static int getLetterQuantityIn(String string) {
+    public static int countLettersIn(String string) {
         int letterCounter = 0;
 
         for (char character : string.toCharArray()) {
@@ -44,6 +44,7 @@ public class StringUtils {
     }
 
     public static Map<String, Integer> getDuplicateQuantitiesIn(String text) {
+        // TODO: 5/5/2017 rename map
         Map<String, Integer> map = new HashMap<>();
 
         for (String word : text.split("\\W+")){

@@ -5,66 +5,67 @@ package lesson10.practice.planes;
  */
 public class AirPlaneWithAnonymous {
 
-    IEngine airPlaneEngine = new IEngine(){
+    IEngine airPlaneEngine;
 
-        class Engine {
-
-            private boolean isActive;
-
-            public boolean isActive() {
-                return isActive;
-            }
-
-            public void setActive(boolean active) {
-                isActive = active;
-            }
-        }
-
-        private Engine engine;
-
-        {
-            engine = new Engine();
-        }
-
-        @Override
-        public String start() {
-            if (engine.isActive()) {
-                return model + " engine is already active";
-            }
-            engine.setActive(true);
-            return model + " engine is activated";
-        }
-
-        @Override
-        public String stop() {
-            if (!engine.isActive()) {
-                return model + " engine is already not active";
-            }
-            engine.setActive(false);
-            return model + " engine has been successfully stopped";
-        }
-    };
-
-        private String model;
+    private String model;
 
     public AirPlaneWithAnonymous(String model) {
         this.model = model;
+        airPlaneEngine = new IEngine() {
+
+            class Engine {
+
+                private boolean isActive;
+
+                public boolean isActive() {
+                    return isActive;
+                }
+
+                public void setActive(boolean active) {
+                    isActive = active;
+                }
+            }
+
+            private Engine engine;
+
+            {
+                engine = new Engine();
+            }
+
+            @Override
+            public String start() {
+                if (engine.isActive()) {
+                    return model + " engine is already active";
+                }
+                engine.setActive(true);
+                return model + " engine is activated";
+            }
+
+            @Override
+            public String stop() {
+                if (!engine.isActive()) {
+                    return model + " engine is already not active";
+                }
+                engine.setActive(false);
+                return model + " engine has been successfully stopped";
+            }
+        };
     }
 
-    public String activateAllSystems(){
+    public String activateAllSystems() {
         StringBuilder result = new StringBuilder();
         /*
             Some code activating other systems.
-            foreach result.append(airPlaneConditioning.stop()
+            For instance, result.append(airPlaneConditioning.stop()
         */
         return result.append(airPlaneEngine.start()).toString();
     }
 
-    public String deactivateAllSystems(){
+    public String deactivateAllSystems() {
         StringBuilder result = new StringBuilder();
         /*
             Some code deactivating other systems.
-            foreach result.append(airPlaneConditioning.start()
+            For instance, result.append(airPlaneConditioning.start()
         */
         return result.append(airPlaneEngine.stop()).toString();
     }

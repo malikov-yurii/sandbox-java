@@ -10,6 +10,10 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class ArraysUtils {
 
+    public static void print(Array array) {
+        System.out.println(array);
+    }
+
     public static Array sum(Array<? extends Number> firstArray, Array<? extends Number> secondArray) {
         ensureSameSizeNumberArraysInitialized(firstArray, secondArray);
         return perform(firstArray, "sum", secondArray);
@@ -23,10 +27,6 @@ public class ArraysUtils {
     public static Array multiply(Array<? extends Number> firstArray, Array<? extends Number> secondArray) {
         ensureSameSizeNumberArraysInitialized(firstArray, secondArray);
         return perform(firstArray, "multiply", secondArray);
-    }
-
-    public static void print(Array array) {
-        System.out.println(array);
     }
 
     @SuppressWarnings("unchecked")

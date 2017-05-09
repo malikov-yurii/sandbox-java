@@ -1,18 +1,9 @@
 public class TestClass{
     public static void main(String[] args) {
 
-
-        System.out.println(new Integer[0].length);
-
-
-//        number = new Short((short)8) * new Long((byte)5) ;
-
-//        System.out.println(number.getClass().getSimpleName());
+//        ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.now(), ZoneId.of(""))
 
 
-//        System.out.println((int) new Double(1.0));
-//        Number n1 = new Integer(3);
-//        Double.sum(n1,new Short((short)3));
 
 
     }
