@@ -1,13 +1,13 @@
 package lesson10.practice.strings;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * @author Yurii Malikov
@@ -44,17 +44,11 @@ public class StringUtils {
     }
 
     public static Map<String, Integer> getDuplicateQuantitiesIn(String text) {
-        // TODO: 5/5/2017 rename map
-        Map<String, Integer> map = new HashMap<>();
-
-        for (String word : text.split("\\W+")){
-            map.put(word, map.containsKey(word) ? map.get(word) + 1 : 1);
-        }
-
-        return map.entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() != 1)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return Stream.of(text.split("\\W+"))
+                .collect(Collectors.toMap(
+                        String::toString,
+                        (s) -> 1,
+                        Integer::sum));
     }
 
 }

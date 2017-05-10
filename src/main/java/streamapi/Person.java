@@ -1,4 +1,7 @@
-package streamapi.streamguidance;
+package streamapi;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Yurii Malikov
@@ -7,11 +10,17 @@ class Person {
     private String name;
     private int age;
     private boolean isProgrammer;
+    private List<Skill> skills;
 
     Person(String name, int age, boolean isProgrammer) {
         this.name = name;
         this.age = age;
         this.isProgrammer = isProgrammer;
+    }
+
+    Person(String name){
+        this.name = name;
+        skills = new ArrayList<>();
     }
 
     public String getName() {
@@ -36,6 +45,14 @@ class Person {
 
     public void setProgrammer(boolean programmer) {
         isProgrammer = programmer;
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
     }
 
     @Override

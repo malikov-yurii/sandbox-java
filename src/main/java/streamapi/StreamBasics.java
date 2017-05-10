@@ -1,4 +1,4 @@
-package streamapi.streamguidance;
+package streamapi;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -146,19 +146,19 @@ public class StreamBasics {
 
         // Example 10
         IntStream.range(1, 3)
-                .mapToObj(i -> new Foo("Foo" + i))
-                .peek(f -> IntStream.rangeClosed(1, 3)
-                        .mapToObj(i -> new Bar("Bar" + i + " from " + f.name))
-                        .forEach(f.bars::add))
-                .flatMap(f -> f.bars.stream())
-                .forEach(b -> System.out.println(b.name));
+                .mapToObj(i -> new Person("Person" + i))
+                .peek(person -> IntStream.rangeClosed(1, 3)
+                        .mapToObj(i -> new Skill("Skill" + i + " of " + person.getName()))
+                        .forEach(person.getSkills()::add))
+                .flatMap(person -> person.getSkills().stream())
+                .forEach(skill -> System.out.println(skill.getName()));
     /*  Console output:
-        Bar1 from Foo1
-        Bar2 from Foo1
-        Bar3 from Foo1
-        Bar1 from Foo2
-        Bar2 from Foo2
-        Bar3 from Foo2
+        Skill1 of Person1
+        Skill2 of Person1
+        Skill3 of Person1
+        Skill1 of Person2
+        Skill2 of Person2
+        Skill3 of Person2
     */
     }
 

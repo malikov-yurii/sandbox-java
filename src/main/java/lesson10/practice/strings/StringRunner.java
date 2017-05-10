@@ -3,7 +3,7 @@ package lesson10.practice.strings;
 /**
  * @author Yurii Malikov
  */
-public class Runner {
+public class StringRunner {
 
     public static void main(String[] args) {
         System.out.println(
@@ -21,10 +21,10 @@ public class Runner {
                  + "\n\nReplace all \"dong\" with \"bong\" in \"Dong-ding-dong\"  ignoring case: "
                     + StringUtils.replaceAllIgnoreCase("dong", "bong", "Dong-ding-dong")
 
-                 + "\n\nDuplicates in text \"I am an awesome programmer. I am an awesome. I am. I\":"
+                 + "\n\nDuplicates in text \"We are awesome programmers. We are awesome. We are. We\":"
         );
 
-        StringUtils.getDuplicateQuantitiesIn("I am an awesome programmer. I am an awesome. I am. I")
+        StringUtils.getDuplicateQuantitiesIn("We are awesome programmers. We are awesome. We are. We")
                 .forEach((k, v) -> System.out.println("Word \"" + k + "\" occurs in text " + v + " times"));
     }
 

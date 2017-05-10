@@ -1,4 +1,4 @@
-package streamapi.streamguidance;
+package streamapi;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -221,26 +221,26 @@ public class StreamCollectorsReduceParallelism {
 
         // Example 23
         ForkJoinPool commonPool = ForkJoinPool.commonPool();
-        System.out.println(commonPool.getParallelism());
+        System.out.println("Threads in pool: " + commonPool.getParallelism());
         /*  Console output:
-            3
+            Threads in pool: 3
         */
 
         long startTime = System.currentTimeMillis();
-        StreamUtil.countPrimes(50000);
+        PrimesUtil.countPrimes(50000);
         long endTime = System.currentTimeMillis();
 
-        System.out.println(endTime - startTime);
+        System.out.println("stream : " + (endTime - startTime));
         /*  Console output:
-            154
+            stream : 158
         */
 
         startTime = System.currentTimeMillis();
-        StreamUtil.parallelCountPrimes(50000);
+        PrimesUtil.parallelCountPrimes(50000);
         endTime = System.currentTimeMillis();
-        System.out.println(endTime - startTime);
+        System.out.println("parallel stream : "+ (endTime - startTime));
         /*  Console output:
-            45
+            parallel stream : 54
         */
 
         // https://dzone.com/articles/think-twice-using-java-8 Think Twice Before Using Java 8 Parallel Streams
