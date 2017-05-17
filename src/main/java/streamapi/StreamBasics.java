@@ -11,27 +11,32 @@ public class StreamBasics {
 
     public static void main(String[] args) {
 
-        // Example 1
+        // team viewer code:   m06-428-427
+
+        // Example 1 Print letters in alphabet order
         IntStream streamFromString = "ed2c4ab".chars();
         streamFromString
                 .filter(Character::isLetter)
                 .sorted()
                 .forEach((e)->System.out.print((char) e + ", "));
-        System.out.println( "; Stream implementation: " + streamFromString.getClass().getName());
+        System.out.println( "; Stream implementation: "
+                + streamFromString.getClass().getName());
     /*  Console output:
-        a, b, c, d, e, ; Stream implementation: java.util.stream.IntPipeline$Head
+        a, b, c, d, e, ; Stream implementation:
+         java.util.stream.IntPipeline$Head
     */
 
-        // Example 2
-        Arrays.stream(new String[]{"a1", "a2", "a3"})
+        // Example 2 Print third element
+        Arrays.stream(new String[]{"a", "b", "c"})
                 .skip(2)
                 .findFirst()
                 .ifPresent(System.out::println);
     /*  Console output:
-        a3
+        c
     */
 
-        // Example 3
+        // Example 3 Infinite streams
+
         Stream.iterate(1, n -> n + 1)
                 .limit(3)
                 .mapToInt(n -> 2 * n)
@@ -44,12 +49,12 @@ public class StreamBasics {
         Stream.generate(() -> "a1")
                 .limit(2)
                 .forEach(System.out::println);
-        /*  Console output:
+    /*  Console output:
             a1
             a1
-        */
+    */
 
-        // Example 4
+        // Example 4 Print max int
         Stream.<String>builder()
                 .add("c1").add("c3").add("c2").build()
                 .map(s -> s.substring(1))
@@ -61,7 +66,7 @@ public class StreamBasics {
         3
     */
 
-        // Example 5
+        // Example 5 Map primitive stream to reference stream
         Stream.of(1.0, 2.0, 3.0)
                 .mapToInt(Double::intValue)
                 .mapToObj(i -> "w" + i)
@@ -72,13 +77,14 @@ public class StreamBasics {
         w3
     */
 
-        // Example 6
+        // Example 6 Intermediate operators are lazy!
         Stream.of("dd2", "aa2", "bb1", "bb3", "cc4")
                 .filter(s -> {
                     System.out.println("Filter: " + s);
                     return true;
                 });
     /* Prints nothing! No terminal operation! */
+
 
         Stream.of("dd2", "aa2", "bb1", "bb3", "cc4")
                 .filter(s -> {
@@ -94,7 +100,7 @@ public class StreamBasics {
         Print using forEach forEach: bb1
     */
 
-        // Example 7
+        // Example 7 Find if any element matches predicate
         System.out.println(
                 Stream.of("dd2", "aa2", "bb1")
                         //.noneMatch(s -> s.startsWith("a"))
@@ -109,12 +115,11 @@ public class StreamBasics {
         true
     */
 
-        // Example 8
-        Stream.of("dd2", "aa2", "bb1")
+        // Example 8 Sort is one level operation
+        Stream.of("d", "a2", "a1", "b")
                 .sorted((s1, s2) -> {
-                    System.out.printf("sort: %s; %s\n", s1, s2);
-                    return s1.compareTo(s2);
-                })
+                    System.out.printf("sort: %s <-> %s\n", s1, s2);
+                    return s1.compareTo(s2);})
                 .filter(s -> {
                     System.out.println("filter: " + s);
                     return s.startsWith("a");
@@ -124,31 +129,38 @@ public class StreamBasics {
                     return s.toUpperCase();
                 })
                 .forEach(s -> System.out.println("forEach: " + s));
-    /*  sort: aa2; dd2
-        sort: bb1; aa2
-        sort: bb1; dd2
-        sort: bb1; aa2
-        filter: aa2
-        map: aa2
-        forEach: AA2
-        filter: bb1
-        filter: dd2
+    /*  sort: a2 <-> d
+        sort: a1 <-> a2
+        sort: b <-> a1
+        sort: b <-> a2
+        sort: b <-> d
+        filter: a1
+        map: a1
+        forEach: A1
+        filter: a2
+        map: a2
+        forEach: A2
+        filter: b
+        filter: d
     */
 
-        // Example 9
+        // Example 9 Streams can be used just once
         Stream<String> stream =
                 Stream.of("dd2", "aa2", "bb1", "bb3", "cc")
                         .filter(s -> s.startsWith("a"));
 
         stream.anyMatch(s -> true);    // works fine
-        //stream.noneMatch(s -> true);   // here we have Exception, because stream can be run processed only once
+
+        //stream.noneMatch(s -> true);
+        // here we have Exception, because stream can be run processed only once
 
 
-        // Example 10
+        // Example 10 FlatMap returns stream of all users skills as one level sequence
         IntStream.range(1, 3)
                 .mapToObj(i -> new Person("Person" + i))
                 .peek(person -> IntStream.rangeClosed(1, 3)
-                        .mapToObj(i -> new Skill("Skill" + i + " of " + person.getName()))
+                        .mapToObj(i -> new Skill("Skill" + i
+                                + " of " + person.getName()))
                         .forEach(person.getSkills()::add))
                 .flatMap(person -> person.getSkills().stream())
                 .forEach(skill -> System.out.println(skill.getName()));

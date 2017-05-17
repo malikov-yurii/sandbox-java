@@ -19,7 +19,7 @@ public class StreamCollectorsReduceParallelism {
 
         //****************** Collectors ******************
 
-        // Example 11
+        // Example 11 Stream of lines from file
         File file = new File("file.txt");
         file.deleteOnExit();
 
@@ -30,13 +30,14 @@ public class StreamCollectorsReduceParallelism {
         out.close();
 
         Stream<String> streamFromFiles = Files.lines(Paths.get(file.getAbsolutePath()));
-        System.out.println("streamFromFiles = " + streamFromFiles.collect(Collectors.toList()) + "; " +
-                "Stream implementation: " + streamFromFiles.getClass().getName());
+        System.out.println("streamFromFiles = "
+                + streamFromFiles.collect(Collectors.toList()) + "; "
+                + "Stream implementation: " + streamFromFiles.getClass().getName());
     /*  Console output:
-        streamFromFiles = [Vive la France, Slava Ukraini, God bless America]; Stream implementation: java.util.stream.ReferencePipeline$Head
+        streamFromFiles = [Vive la France, Slava Ukraini, God bless America];
+        Stream implementation: java.util.stream.ReferencePipeline$Head
     */
 
-        // Example 12
         Collection<Person> persons =
                 Arrays.asList(
                         new Person("Andrew", 20, true),
@@ -44,6 +45,7 @@ public class StreamCollectorsReduceParallelism {
                         new Person("Ira", 23, true),
                         new Person("Vitia", 12, false));
 
+        // Example 12 Group persons by age
         Map<Integer, List<Person>> personsByAge = persons
                 .stream()
                 .collect(Collectors.groupingBy(Person::getAge));
@@ -55,18 +57,21 @@ public class StreamCollectorsReduceParallelism {
         age 23: [Igor, Ira]
         age 12: [Vitia]
     */
-
+        // Get total age of programmers and non-programmers
         Map<Boolean, Integer> programmersAndNonProgrammersAgeSum = persons.stream()
-                .collect(Collectors.groupingBy(Person::isProgrammer, Collectors.summingInt(Person::getAge)));
+                .collect(Collectors.groupingBy(Person::isProgrammer,
+                                               Collectors.summingInt(Person::getAge)));
 
         programmersAndNonProgrammersAgeSum
-                .forEach((isProgrammer, ageSum) -> System.out.format("isProgrammer=%b  :  ageSum=%d\n", isProgrammer, ageSum));
+                .forEach((isProgrammer, ageSum) ->
+                        System.out.format("isProgrammer=%b  :  ageSum=%d\n",
+                                isProgrammer, ageSum));
     /*  Console output:
         isProgrammer=false  :  ageSum=12
         isProgrammer=true   :  ageSum=66
     */
 
-        // Example 13
+        // Example 13 Get average age of persons without mapping to IntStream
         Double averageAge = persons
                 .stream()
                 .collect(Collectors.averagingInt(Person::getAge));
@@ -76,47 +81,50 @@ public class StreamCollectorsReduceParallelism {
     */
 
         // Example 14
-        IntSummaryStatistics ageSummary =
+        IntSummaryStatistics ageStatistics =
                 persons
                         .stream()
                         .collect(Collectors.summarizingInt(Person::getAge));
 
-        System.out.println(ageSummary);
+        System.out.println(ageStatistics);
     /*  Console output:
         IntSummaryStatistics{count=4, sum=78, min=12, average=19.500000, max=23}
     */
 
-        // Example 15
+        // Example 15 Joining collector
         String phrase = persons
                 .stream()
                 .filter(Person::isProgrammer)
                 .map(Person::getName)
-                .collect(Collectors.joining(" and ", "Hey, ", " are awesome programmers!"));
+                .collect(Collectors.joining(" and ",
+                                            "Hey, ",
+                                            " are awesome programmers!"));
         System.out.println(phrase);
     /*  Console output:
         Hey, Andrew and Igor and Ira are awesome programmers!
     */
 
-        // Example 16
+        // Example 16 Map collector which merges same keys
         Map<Integer, String> map = persons
                 .stream()
                 .collect(Collectors.toMap(
-                        Person::getAge,
-                        Person::getName,
-                        (name1, name2) -> name1 + ";" + name2));
+                        Person::getAge,                             // keyMapper
+                        Person::getName,                            // valueMapper
+                        (name1, name2) -> name1 + ";" + name2));    // mergeFunction
 
         System.out.println(map);
     /*  Console output:
         {20=Andrew, 23=Igor;Ira, 12=Vitya}
     */
 
-        // Example 17
+        // Example 17 Own collector
         Collector<Person, StringJoiner, String> personNameCollector =
                 Collector.of(
-                        () -> new StringJoiner(" | "),          // supplier
-                        (j, p) -> j.add(p.getName().toUpperCase()),      // accumulator
-                        StringJoiner::merge,                             // combiner
-                        StringJoiner::toString);                         // finisher
+                        () -> new StringJoiner(" | "),     // supplier (initial object + delimiter)
+                        (j, p) -> j.add(p.getName().toUpperCase()), // accumulator
+                        StringJoiner::merge,                        // combiner (BiOperator for parallelStream)
+                        StringJoiner::toString);                    // finisher (map to final result)
+
         String names = persons
                 .stream()
                 .collect(personNameCollector);
@@ -125,9 +133,9 @@ public class StreamCollectorsReduceParallelism {
         ANDREW | IGOR | IRA | VITIA
     */
 
-        //****************************  stream.reduce() **********************************
+        //****************************  stream.reduce() ********************************
 
-        // Example 18
+        // Example 18 Get youngest person
         persons.stream()
                 .reduce((p1, p2) -> p1.getAge() < p2.getAge() ? p1 : p2)
                 .ifPresent(System.out::println);
@@ -135,34 +143,35 @@ public class StreamCollectorsReduceParallelism {
         Vitia
     */
 
-        // Example 20
+        // Example 20 new Person of all merged names and age sum
         Person result =
                 persons.stream()
-                        .reduce(new Person("", 0, false),
-                                (p1, p2) -> {
+                        .reduce(new Person("", 0, false),  // initial value
+                                (p1, p2) -> {                                     // accumulator
                                     p1.setAge(p1.getAge() + p2.getAge());
                                     p1.setName(p1.getName() + p2.getName());
                                     return p1;
                                 });
-        System.out.format("name=%s; age=%s\n", result.getName(), result.getAge());
+        System.out.format("%s = %s years\n", result.getName(), result.getAge());
     /*  Console output:
-        name=AndrewIgorIraVitia; age=78
+        AndrewIgorIraVitia = 78 years
     */
 
         // Example 21
         System.out.println(
-                persons.parallelStream()
-                        .reduce(0,
-                                (sum, p) -> {
-                                    System.out.format("accumulator: sum=%s; person=%s [%s]\n",
-                                            sum, p, Thread.currentThread().getName());
+            persons.parallelStream()
+                .reduce(0,
+                    (sum, p) -> {                            // BiFunction
+                                    System.out.format(
+                                        "accumulator: sum=%s; person=%s [%s]\n",
+                                          sum, p, Thread.currentThread().getName());
                                     return sum += p.getAge();
-                                },
-                                (sum1, sum2) -> {
-                                    System.out.format("combiner: sum1=%s; sum2=%s [%s]\n",
-                                            sum1, sum2, Thread.currentThread().getName());
-                                    return sum1 + sum2;
-                                })
+                    },
+                    (sum1, sum2) -> {                        // BiOperator
+                        System.out.format("combiner: sum1=%s; sum2=%s [%s]\n",
+                               sum1, sum2, Thread.currentThread().getName());
+                        return sum1 + sum2;
+                    })
         );
     /*  Console output:
         accumulator: sum=0; person=Ira [main]
@@ -177,8 +186,13 @@ public class StreamCollectorsReduceParallelism {
 
         // ********************* Streams and parallelism *******************************
 
-        // Example 22
-        //List sortedList =
+        ForkJoinPool commonPool = ForkJoinPool.commonPool();
+        System.out.println("Threads in pool: " + commonPool.getParallelism());
+        /*  Console output:
+            Threads in pool: 3
+        */
+
+        // Example 22 Parallel stream in work
         Arrays.asList("a1", "c1", "d1", "b1")
                 .parallelStream()
                 .filter(s -> {
@@ -191,14 +205,13 @@ public class StreamCollectorsReduceParallelism {
                             s, Thread.currentThread().getName());
                     return s.toUpperCase();
                 })
-                .sorted((s1, s2) -> {                                      // Arrays.parallelSort()    underneath!!!
+                .sorted((s1, s2) -> {     // Arrays.parallelSort()    underneath!!!
                     System.out.format("sort: %s <> %s [%s]\n",
                             s1, s2, Thread.currentThread().getName());
                     return s1.compareTo(s2);
                 })
-                .forEach(s -> System.out.format("forEach: %s [%s]\n",s, Thread.currentThread().getName()));
-                //.collect(Collectors.toList());
-        //System.out.println(sortedList);
+                .forEach(s -> System.out.format("forEach: %s [%s]\n",s,
+                                                Thread.currentThread().getName()));
         /*  Console output:
             filter: d1 [main]
             map: d1 [main]
@@ -219,31 +232,33 @@ public class StreamCollectorsReduceParallelism {
             forEach: A1 [ForkJoinPool.commonPool-worker-3]
         */
 
-        // Example 23
-        ForkJoinPool commonPool = ForkJoinPool.commonPool();
-        System.out.println("Threads in pool: " + commonPool.getParallelism());
+
+        // Example 23 Parallel stream performance test
+        long startTimePoint, parallelStreamSum = 0, regularStreamSum = 0, loopQuantity = 1_000;
+        int primesTopLimit = 50_000;
+
+        for (int i = 0; i < loopQuantity; i++) {
+            startTimePoint = System.currentTimeMillis();
+            PrimesUtil.parallelCountPrimes(primesTopLimit);
+            parallelStreamSum += System.currentTimeMillis() - startTimePoint;
+
+            startTimePoint = System.currentTimeMillis();
+            PrimesUtil.countPrimes(primesTopLimit);
+            regularStreamSum += System.currentTimeMillis() - startTimePoint;
+        }
+
+        System.out.println("stream : " + regularStreamSum / loopQuantity + " millis");
         /*  Console output:
-            Threads in pool: 3
+            stream : 42 millis
         */
 
-        long startTime = System.currentTimeMillis();
-        PrimesUtil.countPrimes(50000);
-        long endTime = System.currentTimeMillis();
-
-        System.out.println("stream : " + (endTime - startTime));
+        System.out.println("parallel stream : "+ parallelStreamSum / loopQuantity + " millis");
         /*  Console output:
-            stream : 158
+            parallel stream : 14 millis
         */
 
-        startTime = System.currentTimeMillis();
-        PrimesUtil.parallelCountPrimes(50000);
-        endTime = System.currentTimeMillis();
-        System.out.println("parallel stream : "+ (endTime - startTime));
-        /*  Console output:
-            parallel stream : 54
-        */
-
-        // https://dzone.com/articles/think-twice-using-java-8 Think Twice Before Using Java 8 Parallel Streams
+        // https://dzone.com/articles/think-twice-using-java-8
+        // Think Twice Before Using Java 8 Parallel Streams
 
     }
 

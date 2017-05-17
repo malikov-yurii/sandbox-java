@@ -14,26 +14,20 @@ import java.util.stream.Stream;
  */
 public class StringUtils {
 
-    public static int countLettersIn(String string) {
-        int letterCounter = 0;
-
-        for (char character : string.toCharArray()) {
-            if (Character.isLetter(character)) {
-                letterCounter++;
-            }
-        }
-
-        return letterCounter;
-//        return string.length() - string.replaceAll("[a-zA-Z]", "").length();
-//        return (int) string.chars().mapToObj(i -> (char) i).filter(Character::isLetter).count();
+    public static long countLettersIn(String string) {
+        return string.chars()
+                .filter(Character::isLetter)
+                .count();
     }
 
     public static List<Integer> getSubstringsIndexesInString(String substring, String string) {
         List<Integer> indexes = new ArrayList<>();
 
         Matcher matcher = Pattern.compile(substring).matcher(string.toLowerCase());
-        while (matcher.find()){
-            indexes.addAll(IntStream.range(matcher.start(), matcher.end()).boxed().collect(Collectors.toList()));
+        while (matcher.find()) {
+            indexes.addAll(IntStream.range(matcher.start(), matcher.end())
+                    .boxed()
+                    .collect(Collectors.toList()));
         }
 
         return indexes;
@@ -48,7 +42,13 @@ public class StringUtils {
                 .collect(Collectors.toMap(
                         String::toString,
                         (s) -> 1,
-                        Integer::sum));
+                        Integer::sum))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() != 1)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue));
     }
 
 }
