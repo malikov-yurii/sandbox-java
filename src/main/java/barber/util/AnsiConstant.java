@@ -1,9 +1,9 @@
-package practicemultithreading;
+package barber.util;
 
 /**
  * @author Yurii Malikov
  */
-public class AnsiConstants {
+public class AnsiConstant {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";

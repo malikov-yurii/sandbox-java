@@ -1,4 +1,4 @@
-package practicemultithreading;
+package barber;
 
 /**
  * @author Yurii Malikov
@@ -13,40 +13,40 @@ public class HairdressingSalon{
 
     private String name;
 
-    private int totalWaitingRoomCapacity;
-
     private AtomicInteger waitingRoomFreeSeatsQuantity;
 
-    private Semaphore hairdresserRoom;
-
-    private BlockingQueue<Client> waitingClients;
-
     private Semaphore waitingRoomDoor;
+
+    private Semaphore barberRoomDoor;
+
+    private Semaphore barbersChairCreepyBelt;
+
+    private BlockingQueue<Client> waitingClientsQueue;
 
 
     public HairdressingSalon(String name, int totalWaitingRoomCapacity) {
         this.name = name;
-        this.totalWaitingRoomCapacity = totalWaitingRoomCapacity;
         waitingRoomFreeSeatsQuantity = new AtomicInteger(totalWaitingRoomCapacity);
-        hairdresserRoom = new Semaphore(1);
-        waitingClients = new ArrayBlockingQueue<>(totalWaitingRoomCapacity);
         waitingRoomDoor = new Semaphore(1); // one by one, gentlemen!
-    }
-
-    public int getTotalWaitingRoomCapacity() {
-        return totalWaitingRoomCapacity;
+        barberRoomDoor = new Semaphore(1);
+        barbersChairCreepyBelt = new Semaphore(0);
+        waitingClientsQueue = new ArrayBlockingQueue<>(totalWaitingRoomCapacity);
     }
 
     public AtomicInteger getWaitingRoomFreeSeatsQuantity() {
         return waitingRoomFreeSeatsQuantity;
     }
 
-    public Semaphore getHairdresserRoom() {
-        return hairdresserRoom;
+    public Semaphore getBarberRoomDoor() {
+        return barberRoomDoor;
     }
 
-    public BlockingQueue<Client> getWaitingClients() {
-        return waitingClients;
+    public Semaphore getBarbersChairCreepyBelt() {
+        return barbersChairCreepyBelt;
+    }
+
+    public BlockingQueue<Client> getWaitingClientsQueue() {
+        return waitingClientsQueue;
     }
 
     public Semaphore getWaitingRoomDoor() {
@@ -55,6 +55,6 @@ public class HairdressingSalon{
 
     @Override
     public String toString() {
-        return "HairdressingSalon \"" + name + '"';
+        return "barber shop \"" + name + '"';
     }
 }
