@@ -26,10 +26,10 @@ class SortCompareTest {
         Arrays.sort(javaSortArr);
         System.out.println(LocalDateTime.now() + " javaSortArr done");
 
-        QuickSortImpl.sort(quickSortArr);
+        QuickSort.sort(quickSortArr);
         System.out.println(LocalDateTime.now() + " quickSortArr done");
 
-        BubbleSortImpl.sort(bubbleSortArr);
+        BubbleSort.sort(bubbleSortArr);
         System.out.println(LocalDateTime.now() + " bubbleSortArr done");
 
         assertThat(quickSortArr).isEqualTo(javaSortArr);

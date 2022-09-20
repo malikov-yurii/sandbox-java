@@ -1,4 +1,4 @@
-public class QuickSortImpl {
+public class QuickSort {
 
     private static int swapCount = 0;
 
