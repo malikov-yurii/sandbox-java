@@ -3,6 +3,7 @@ package todo;
 public class FindAllPermutationsOfSmallStringInBiggerString {
 
     /*
+    "Cracking the coding interview" page 70
     B - bigger:  abaacaab
     S - smaller: baa
     Answer is indexes of found permutation starts: [0, 1, 5]
