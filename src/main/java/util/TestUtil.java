@@ -32,15 +32,13 @@ public class TestUtil {
         if (strLen > Character.MAX_VALUE) {
             throw new IllegalArgumentException(format("unique char strLen should be < %s", Character.MAX_VALUE));
         }
-        log.info(format("str.length=%,d", strLen));
         StringBuilder sb = new StringBuilder();
         for (char i = 0; i < strLen; i++) {
             sb.append(i);
         }
-        for (char i = 0; i < strLen; i++) {
-            sb.append(i);
-        }
-        return sb.toString();
+        String str = sb.toString();
+        log.info(format("generateUniqueCharStringOrdered.length=%,d", str.length()));
+        return str;
     }
 
     public static String generateUniqueCharStringUnordered(int strLen) {
@@ -56,7 +54,9 @@ public class TestUtil {
         while (!chars.isEmpty()) {
             sb.append(chars.remove(random.nextInt(chars.size())));
         }
-        return sb.toString();
+        String str = sb.toString();
+        log.info(format("generateUniqueCharStringUnordered.length=%,d", str.length()));
+        return str;
     }
 
     public static int[] asIntArray(char[] charArray) {
