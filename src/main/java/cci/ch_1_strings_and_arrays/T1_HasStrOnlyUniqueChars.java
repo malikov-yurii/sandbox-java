@@ -1,7 +1,7 @@
 package cci.ch_1_strings_and_arrays;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import sort.QuickSort;
+import util.TestUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +23,7 @@ public class T1_HasStrOnlyUniqueChars {
         return true;
     }
 
-    //    Runtime: O(n^2)        |  O( n * (n + 1) / 2 )   |   n n-1 n-2 ... 3 2 1
+    //    Runtime: O(n^2)        |  (n + 1) * n / 2   |   n n-1 n-2 ... 3 2 1
     //    Memory: O(1)
     public static boolean isAllCharsUniqueV2(String str) {
         for (int i = 0; i < str.length(); i++) {
@@ -36,12 +36,25 @@ public class T1_HasStrOnlyUniqueChars {
         return true;
     }
 
-    //    Runtime: O(n)        |  O( n * 1 ) | 1 1 1 ... 1 1
+    //    Runtime: O(n)        |  n * 1   |   1 1 1 ... 1 1
     //    Memory:  O(n)
     public static boolean isAllCharsUniqueV3(String str) {
         Set<Character> seen = new HashSet<>();
         for (char ch : str.toCharArray()) {
             if (!seen.add(ch)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //    Runtime: O(n * log(n))        |  n log(n) + n
+    //    Memory:  O(n)
+    public static boolean isAllCharsUniqueV4(String str) {
+        int[] arr = str.chars().toArray();
+        QuickSort.sort(arr);
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == arr[i - 1]) {
                 return false;
             }
         }

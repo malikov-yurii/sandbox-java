@@ -3,6 +3,11 @@ package util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import static java.lang.String.format;
 
 public class TestUtil {
@@ -20,21 +25,44 @@ public class TestUtil {
             totalTime += runtime;
             log.info(format("%s #%s took %,.3f ms", testLabel, i, runtime / 1_000_000.0));
         }
-        log.info(format("%s avg %,.3f ms", testLabel, 1.0 * totalTime / runCount / 1_000_000.0));
+        log.info(format("%s avg ---------------- %,.3f ms", testLabel, 1.0 * totalTime / runCount / 1_000_000.0));
     }
 
-    public static String generateUniqueCharString(int strLen) {
+    public static String generateUniqueCharStringOrdered(int strLen) {
         if (strLen > Character.MAX_VALUE) {
             throw new IllegalArgumentException(format("unique char strLen should be < %s", Character.MAX_VALUE));
         }
         log.info(format("str.length=%,d", strLen));
-//        return RandomStringUtils.random(strLen);
         StringBuilder sb = new StringBuilder();
-//        for (char i = 0; i < Character.MAX_VALUE; i++) {
+        for (char i = 0; i < strLen; i++) {
+            sb.append(i);
+        }
         for (char i = 0; i < strLen; i++) {
             sb.append(i);
         }
         return sb.toString();
+    }
+
+    public static String generateUniqueCharStringUnordered(int strLen) {
+        if (strLen > Character.MAX_VALUE) {
+            throw new IllegalArgumentException(format("unique char strLen should be < %s", Character.MAX_VALUE));
+        }
+        Random random = new Random();
+        List<Character> chars = new ArrayList<>();
+        for (char i = 0; i < strLen; i++) {
+            chars.add(i);
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!chars.isEmpty()) {
+            sb.append(chars.remove(random.nextInt(chars.size())));
+        }
+        return sb.toString();
+    }
+
+    public static int[] asIntArray(char[] charArray) {
+        int[] result = new int[charArray.length];
+        Arrays.setAll(result, i -> (int) charArray[i]);
+        return result;
     }
 
 }

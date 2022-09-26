@@ -1,3 +1,5 @@
+package sort;
+
 public class BubbleSort {
 
     private static int swapCount = 0;

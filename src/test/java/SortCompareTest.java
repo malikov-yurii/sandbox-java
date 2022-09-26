@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import sort.BubbleSort;
+import sort.QuickSort;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

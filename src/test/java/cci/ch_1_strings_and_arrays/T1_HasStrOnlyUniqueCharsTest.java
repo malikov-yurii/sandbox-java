@@ -8,6 +8,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 class T1_HasStrOnlyUniqueCharsTest {
 
     @Test
+    void testAllCharsUnique_V4() {
+        assertThat(T1_HasStrOnlyUniqueChars.isAllCharsUniqueV4(TestUtil.UNIQUE_CHAR_STR))
+                .as(TestUtil.UNIQUE_CHAR_STR)
+                .isTrue();
+        assertThat(T1_HasStrOnlyUniqueChars.isAllCharsUniqueV4(TestUtil.NON_UNIQUE_CHAR_STR))
+                .as(TestUtil.NON_UNIQUE_CHAR_STR)
+                .isFalse();
+    }
+    @Test
     void testAllCharsUnique_V3() {
         assertThat(T1_HasStrOnlyUniqueChars.isAllCharsUniqueV3(TestUtil.UNIQUE_CHAR_STR))
                 .as(TestUtil.UNIQUE_CHAR_STR)
@@ -39,7 +48,9 @@ class T1_HasStrOnlyUniqueCharsTest {
 
     @Test
     void testAllCharsUnique_compareRuntime() {
-        String longString = TestUtil.generateUniqueCharString(30_000);
+//        String longString = TestUtil.generateUniqueCharStringOrdered(12_500);
+//        String longString = TestUtil.generateUniqueCharStringUnordered(30_500);
+        String longString = TestUtil.generateUniqueCharStringUnordered(Character.MAX_VALUE);
         int runCount = 7;
         TestUtil.executeTaskMultipleTimes("V1", runCount,
                 () -> T1_HasStrOnlyUniqueChars.isAllCharsUniqueV1(longString));
@@ -47,6 +58,18 @@ class T1_HasStrOnlyUniqueCharsTest {
                 () -> T1_HasStrOnlyUniqueChars.isAllCharsUniqueV2(longString));
         TestUtil.executeTaskMultipleTimes("V3", runCount,
                 () -> T1_HasStrOnlyUniqueChars.isAllCharsUniqueV3(longString));
+        TestUtil.executeTaskMultipleTimes("V4", runCount,
+                () -> T1_HasStrOnlyUniqueChars.isAllCharsUniqueV4(longString));
+    }
+
+    @Test
+    void testAllCharsUnique_runtime() {
+//        String longString = TestUtil.generateUniqueCharStringOrderedChars(12_500);
+        String longString = TestUtil.generateUniqueCharStringUnordered(12_500);
+        T1_HasStrOnlyUniqueChars.isAllCharsUniqueV4(longString);
+//        int runCount = 7;
+//        TestUtil.executeTaskMultipleTimes("V4", runCount,
+//                () -> T1_HasStrOnlyUniqueChars.isAllCharsUniqueV4(longString));
     }
 
 }

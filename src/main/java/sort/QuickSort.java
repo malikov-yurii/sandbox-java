@@ -1,3 +1,5 @@
+package sort;
+
 public class QuickSort {
 
     private static int swapCount = 0;
@@ -5,7 +7,7 @@ public class QuickSort {
     public static void sort(int[] arr) {
         swapCount = 0;
         quicksort(arr, 0, arr.length - 1);
-        System.out.println("QuickSortImpl.swapCount=" + swapCount);
+//        System.out.println("QuickSortImpl.swapCount=" + swapCount);
     }
 
     private static void quicksort(int[] arr, int begin, int end) {
@@ -33,7 +35,7 @@ public class QuickSort {
         if (i == j) {
             return;
         }
-        swapCount++;
+//        swapCount++;
         int tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
