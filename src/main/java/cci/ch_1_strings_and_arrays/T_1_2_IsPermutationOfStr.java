@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*1.2 Is one str a permutation of another */
-public class T2_IsPermutationOfStr {
+public class T_1_2_IsPermutationOfStr {
 
     //    Runtime: O(n)        |  n + n where n is str.length | n n n ... n
     //    Memory: O(n)

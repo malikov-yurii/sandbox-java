@@ -5,14 +5,14 @@ import util.TestUtil;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class T2_IsPermutationOfStrTest {
+class T_1_2_IsPermutationOfStrTest {
 
     @Test
     void isPermutationV1() {
         String str1 = TestUtil.generateUniqueCharStringUnordered(Character.MAX_VALUE);
         String str2 = TestUtil.generateUniqueCharStringOrdered(Character.MAX_VALUE);
         TestUtil.executeTaskMultipleTimes("V1", 15,
-                () -> assertThat(T2_IsPermutationOfStr.isPermutationV1(str1, str2)).isTrue());
+                () -> assertThat(T_1_2_IsPermutationOfStr.isPermutationV1(str1, str2)).isTrue());
     }
 
     @Test
@@ -20,7 +20,7 @@ class T2_IsPermutationOfStrTest {
         String str1 = TestUtil.generateUniqueCharStringUnordered(Character.MAX_VALUE) + "a";
         String str2 = TestUtil.generateUniqueCharStringOrdered(Character.MAX_VALUE) + "b";
         TestUtil.executeTaskMultipleTimes("V1", 15,
-                () -> assertThat(T2_IsPermutationOfStr.isPermutationV1(str1, str2)).isFalse());
+                () -> assertThat(T_1_2_IsPermutationOfStr.isPermutationV1(str1, str2)).isFalse());
     }
 
 }

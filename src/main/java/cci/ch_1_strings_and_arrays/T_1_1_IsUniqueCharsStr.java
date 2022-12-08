@@ -7,7 +7,7 @@ import java.util.Set;
 
 /*1.1 Is Unique: Implement an algorithm to determine if a string has all unique characters.
 What if you can not use additional data structures.*/
-public class T1_IsUniqueCharsStr {
+public class T_1_1_IsUniqueCharsStr {
 
     //    Runtime: O(n^2)        |  n*n where n is str.length | n n n ... n
     //    Memory: O(1)
