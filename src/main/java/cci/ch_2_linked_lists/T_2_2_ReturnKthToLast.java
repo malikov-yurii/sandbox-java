@@ -1,7 +1,7 @@
 package cci.ch_2_linked_lists;
 
 /* Remove dups from unordered linked list */
-public class T_2_1_ReturnKthToLast {
+public class T_2_2_ReturnKthToLast {
 
     //    Runtime : O(n)
     //    Memory  : O(1)
