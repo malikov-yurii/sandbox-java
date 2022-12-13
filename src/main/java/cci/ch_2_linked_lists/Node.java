@@ -1,11 +1,11 @@
 package cci.ch_2_linked_lists;
 
-public class Node {
+public class Node<T extends Comparable<T>> {
 
-    Object data;
-    Node next;
+    T data;
+    Node<T> next;
 
-    public Node(Object data, Node next) {
+    public Node(T data, Node<T> next) {
         this.data = data;
         this.next = next;
     }
@@ -14,6 +14,5 @@ public class Node {
     public String toString() {
         return "Node{data=" + data + ",next=" + next + "}";
     }
-
 
 }

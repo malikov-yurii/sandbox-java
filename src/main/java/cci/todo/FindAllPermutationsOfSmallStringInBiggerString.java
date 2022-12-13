@@ -1,4 +1,4 @@
-package todo;
+package cci.todo;
 
 public class FindAllPermutationsOfSmallStringInBiggerString {
 
