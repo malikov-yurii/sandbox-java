@@ -10,7 +10,46 @@ class T_2_4_PartitionLinkedListTest {
     public static final int PIVOT = 5;
 
     @Test
-    void partitionCase1() {
+    void partitionCase_2_1() {
+        Node<Integer> n7 = new Node<>(1, null);
+        Node<Integer> n6 = new Node<>(2, n7);
+        Node<Integer> n5 = new Node<>(10, n6);
+        Node<Integer> n4 = new Node<>(5, n5);
+        Node<Integer> n3 = new Node<>(8, n4);
+        Node<Integer> n2 = new Node<>(5, n3);
+        Node<Integer> n1 = new Node<>(3, n2);
+
+        verifyPartitioned(T_2_4_PartitionLinkedList.partition2(n1, PIVOT));
+    }
+
+    @Test
+    void partitionCase_2_2() {
+        Node<Integer> n7 = new Node<>(1, null);
+        Node<Integer> n6 = new Node<>(2, n7);
+        Node<Integer> n5 = new Node<>(10, n6);
+        Node<Integer> n4 = new Node<>(5, n5);
+        Node<Integer> n3 = new Node<>(8, n4);
+        Node<Integer> n2 = new Node<>(3, n3);
+        Node<Integer> n1 = new Node<>(5, n2);
+
+        verifyPartitioned(T_2_4_PartitionLinkedList.partition2(n1, PIVOT));
+    }
+
+    @Test
+    void partitionCase_2_3() {
+        Node<Integer> n7 = new Node<>(5, null);
+        Node<Integer> n6 = new Node<>(2, n7);
+        Node<Integer> n5 = new Node<>(10, n6);
+        Node<Integer> n4 = new Node<>(1, n5);
+        Node<Integer> n3 = new Node<>(8, n4);
+        Node<Integer> n2 = new Node<>(3, n3);
+        Node<Integer> n1 = new Node<>(5, n2);
+
+        verifyPartitioned(T_2_4_PartitionLinkedList.partition2(n1, PIVOT));
+    }
+
+    @Test
+    void partitionCase_1() {
         Node<Integer> n7 = new Node<>(1, null);
         Node<Integer> n6 = new Node<>(2, n7);
         Node<Integer> n5 = new Node<>(10, n6);
@@ -23,7 +62,7 @@ class T_2_4_PartitionLinkedListTest {
     }
 
     @Test
-    void partitionCase2() {
+    void partitionCase_2() {
         Node<Integer> n7 = new Node<>(1, null);
         Node<Integer> n6 = new Node<>(2, n7);
         Node<Integer> n5 = new Node<>(10, n6);
@@ -36,7 +75,7 @@ class T_2_4_PartitionLinkedListTest {
     }
 
     @Test
-    void partitionCase4() {
+    void partitionCase_3() {
         Node<Integer> n7 = new Node<>(5, null);
         Node<Integer> n6 = new Node<>(2, n7);
         Node<Integer> n5 = new Node<>(10, n6);
