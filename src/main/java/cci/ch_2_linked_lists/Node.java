@@ -1,6 +1,6 @@
 package cci.ch_2_linked_lists;
 
-public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
+public class Node<T extends Comparable<T>> {
 
     T data;
     Node<T> next;
@@ -13,11 +13,6 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     @Override
     public String toString() {
         return "Node{data=" + data + ",next=" + next + "}";
-    }
-
-    @Override
-    public int compareTo(Node<T> o) {
-        return this.data.compareTo(o.data);
     }
 
 }

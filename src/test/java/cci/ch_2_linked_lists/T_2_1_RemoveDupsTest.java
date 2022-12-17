@@ -8,7 +8,7 @@ class T_2_1_RemoveDupsTest {
 
     @Test
     void removeDups2() {
-        Node n5 = new Node(5, null);
+        Node<?> n5 = new Node<>(5, null);
         Node n4 = new Node(4, n5);
         Node n3 = new Node(2, n4);
         Node n2 = new Node(2, n3);
