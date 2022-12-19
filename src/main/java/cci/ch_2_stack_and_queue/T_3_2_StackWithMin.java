@@ -1,8 +1,10 @@
 package cci.ch_2_stack_and_queue;
 
-public class T_3_1_MinStack<T extends Comparable<T>> {
+import java.util.EmptyStackException;
 
-    MinStackNode top;
+public class T_3_2_StackWithMin<T extends Comparable<T>> {
+
+    private MinStackNode top;
 
     private class MinStackNode {
         final T data;

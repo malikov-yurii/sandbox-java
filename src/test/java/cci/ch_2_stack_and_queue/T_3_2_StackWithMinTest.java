@@ -4,15 +4,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class T_3_1_MinStackTest {
+class T_3_2_StackWithMinTest {
 
     @Test
     void min() {
-        T_3_1_MinStack<Integer> minStack = new T_3_1_MinStack<>();
+        T_3_2_StackWithMin<Integer> minStack = new T_3_2_StackWithMin<>();
         minStack.push(1);
         assertThat(minStack.min()).isEqualTo(1);
 
         minStack.push(2);
+        assertThat(minStack.min()).isEqualTo(1);
+
+        minStack.push(1);
+        assertThat(minStack.min()).isEqualTo(1);
+
+        minStack.push(1);
         assertThat(minStack.min()).isEqualTo(1);
 
         minStack.push(2);
@@ -37,6 +43,12 @@ class T_3_1_MinStackTest {
         assertThat(minStack.min()).isEqualTo(1);
 
         assertThat(minStack.pop()).isEqualTo(2);
+        assertThat(minStack.min()).isEqualTo(1);
+
+        assertThat(minStack.pop()).isEqualTo(1);
+        assertThat(minStack.min()).isEqualTo(1);
+
+        assertThat(minStack.pop()).isEqualTo(1);
         assertThat(minStack.min()).isEqualTo(1);
     }
 }
