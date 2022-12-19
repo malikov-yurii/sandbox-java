@@ -10,6 +10,24 @@ public class Node<T extends Comparable<T>> {
         this.next = next;
     }
 
+    public int getLength() {
+        int len = 0;
+        Node<?> n = this;
+        while (n != null) {
+            len++;
+            n = n.next;
+        }
+        return len;
+    }
+
+    public Node<T> skip(int numToSkip) {
+        Node<T> n = this;
+        for (int i = 0; i < numToSkip; i++) {
+            n = n.next;
+        }
+        return n;
+    }
+
     @Override
     public String toString() {
         return "Node{data=" + data + ",next=" + next + "}";
