@@ -11,12 +11,13 @@ class T_4_2_MinSearchBinaryTreeFromSortedArrayTest {
     /*                       7
                     3                 11
                 1       5        9         13
-              0   2   4        8   10   12    14          */
+              0   2   4   6     8   10   12    14          */
 
     @Test
     void shouldCreateBinarySearchTreeFromArrayOfSortedInts() {
         //given
         int[] sortedInts = IntStream.range(0, 15).toArray();
+//        sortedInts = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
         //when
         TreeNode<Integer> root = T_4_2_MinSearchBinaryTreeFromSortedArray.createBinarySearchTree(sortedInts);
@@ -29,6 +30,7 @@ class T_4_2_MinSearchBinaryTreeFromSortedArrayTest {
         assertThat(root.left.left.right.data).isEqualTo(2);
         assertThat(root.left.right.data).isEqualTo(5);
         assertThat(root.left.right.left.data).isEqualTo(4);
+        assertThat(root.left.right.right.data).isEqualTo(6);
 
         assertThat(root.right.data).isEqualTo(11);
         assertThat(root.right.right.data).isEqualTo(13);
@@ -37,7 +39,5 @@ class T_4_2_MinSearchBinaryTreeFromSortedArrayTest {
         assertThat(root.right.left.right.data).isEqualTo(10);
         assertThat(root.right.right.right.data).isEqualTo(14);
         assertThat(root.right.right.left.data).isEqualTo(12);
-//        assertThat(root.right.right.right.data).isEqualTo(6);
-//        assertThat(root.right.left.data).isEqualTo(7);
     }
 }
