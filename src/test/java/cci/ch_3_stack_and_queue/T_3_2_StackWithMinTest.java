@@ -1,14 +1,14 @@
-package cci.ch_2_stack_and_queue;
+package cci.ch_3_stack_and_queue;
 
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class T_3_2_StackWithMinOptimisedTest {
+class T_3_2_StackWithMinTest {
 
     @Test
     void min() {
-        T_3_2_StackWithMinOptimised<Integer> minStack = new T_3_2_StackWithMinOptimised<>();
+        T_3_2_StackWithMin<Integer> minStack = new T_3_2_StackWithMin<>();
         minStack.push(1);
         assertThat(minStack.min()).isEqualTo(1);
 

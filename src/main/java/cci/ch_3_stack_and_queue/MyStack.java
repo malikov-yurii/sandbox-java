@@ -1,4 +1,4 @@
-package cci.ch_2_stack_and_queue;
+package cci.ch_3_stack_and_queue;
 
 import java.util.EmptyStackException;
 
