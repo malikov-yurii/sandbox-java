@@ -1,11 +1,11 @@
 package cci.ch_2_linked_lists;
 
-public class LinkedNode {
+public class LinkedNode<T> {
 
-    Object data;
-    LinkedNode next;
+    public T data;
+    public LinkedNode<T> next;
 
-    public LinkedNode(Object data, LinkedNode next) {
+    public LinkedNode(T data, LinkedNode<T> next) {
         this.data = data;
         this.next = next;
     }
