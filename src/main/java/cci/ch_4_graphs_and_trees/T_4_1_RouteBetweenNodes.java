@@ -7,22 +7,22 @@ import java.util.Queue;
 
 public class T_4_1_RouteBetweenNodes {
 
-    public static Node[] findRoute(Graph graph, Node fromNode, Node toNode) {
-        for (Node n : graph.nodes) {
-            n.setState(Node.State.Unvisited);
+    public static GraphNode[] findRoute(Graph graph, GraphNode fromNode, GraphNode toNode) {
+        for (GraphNode n : graph.nodes) {
+            n.setState(GraphNode.State.Unvisited);
         }
-        Node[] path = null;
-        Queue<LinkedNode<Node>> queue = new LinkedList<>();
+        GraphNode[] path = null;
+        Queue<LinkedNode<GraphNode>> queue = new LinkedList<>();
         queue.offer(new LinkedNode<>(fromNode, null));
         while (!queue.isEmpty()) {
-            LinkedNode<Node> bfsNode = queue.poll();
-            bfsNode.data.setState(Node.State.Visited);
+            LinkedNode<GraphNode> bfsNode = queue.poll();
+            bfsNode.data.setState(GraphNode.State.Visited);
             if (bfsNode.data == toNode) {
                 path = buildRoute(bfsNode);
                 break;
             }
-            for (Node child : bfsNode.data.getAdjacent()) {
-                if (child.getState() != Node.State.Visited) {
+            for (GraphNode child : bfsNode.data.getAdjacent()) {
+                if (child.getState() != GraphNode.State.Visited) {
                     queue.offer(new LinkedNode<>(child, bfsNode));
                 }
             }
@@ -30,14 +30,14 @@ public class T_4_1_RouteBetweenNodes {
         return path;
     }
 
-    private static Node[] buildRoute(LinkedNode<Node> bfsNode) {
-        LinkedList<Node> path = new LinkedList<>();
-        LinkedNode<Node> currentBfsNode = bfsNode;
+    private static GraphNode[] buildRoute(LinkedNode<GraphNode> bfsNode) {
+        LinkedList<GraphNode> path = new LinkedList<>();
+        LinkedNode<GraphNode> currentBfsNode = bfsNode;
         while (currentBfsNode != null) {
             path.addFirst(currentBfsNode.data);
             currentBfsNode = currentBfsNode.next;
         }
-        return path.toArray(new Node[0]);
+        return path.toArray(new GraphNode[0]);
     }
 
 }

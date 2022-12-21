@@ -1,14 +1,14 @@
 package cci.ch_4_graphs_and_trees;
 
-public class Node {
+public class GraphNode {
 
     enum State { Unvisited, Visiting, Visited}
 
     private final String name;
-    private Node[] adjacent;
+    private GraphNode[] adjacent;
     private State state;
 
-    public Node(String name, Node... adjacent) {
+    public GraphNode(String name, GraphNode... adjacent) {
         this.name = name;
         this.adjacent = adjacent;
     }
@@ -25,12 +25,12 @@ public class Node {
         this.state = state;
     }
 
-    public void setAdjacent(Node... adjacent) {
+    public void setAdjacent(GraphNode... adjacent) {
         this.adjacent = adjacent;
     }
 
-    public Node[] getAdjacent() {
-        return adjacent == null ? new Node[]{} : adjacent;
+    public GraphNode[] getAdjacent() {
+        return adjacent == null ? new GraphNode[]{} : adjacent;
     }
 
     @Override
