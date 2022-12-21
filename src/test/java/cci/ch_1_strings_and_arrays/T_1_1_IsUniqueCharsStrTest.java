@@ -46,7 +46,7 @@ class T_1_1_IsUniqueCharsStrTest {
                 .isFalse();
     }
 
-    @Test
+//    @Test
     void testAllCharsUnique_compareRuntime() {
 //        String longString = TestUtil.generateUniqueCharStringOrdered(12_500);
 //        String longString = TestUtil.generateUniqueCharStringUnordered(30_500);
