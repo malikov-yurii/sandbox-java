@@ -19,22 +19,21 @@ class T_4_4_CheckBalancedTest {
     }
 
     @Test
-    void checkBalancedTrue2() {
+    void checkBalancedTrue1() {
         //given
-        TreeNode<Integer> root = new TreeNode<>(null,
-                null,
-                new TreeNode(null, null, new TreeNode()));
+        TreeNode<Integer> root = T_4_2_MinSearchBinaryTreeFromSortedArray
+                .createBinarySearchTree(IntStream.range(0, 1001).toArray());
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isTrue();
     }
 
     @Test
-    void checkBalancedTrue3() {
+    void checkBalancedTrue2() {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
-                null,
-                new TreeNode(null, new TreeNode(), new TreeNode()));
+                new TreeNode(),
+                new TreeNode(null, new TreeNode(), null));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isTrue();
@@ -96,5 +95,27 @@ class T_4_4_CheckBalancedTest {
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();
     }
 
+    @Test
+    void checkBalancedFalse4() {
+        //given
+        TreeNode<Integer> root = new TreeNode<>(null,
+                null,
+                new TreeNode(null, null, new TreeNode()));
 
+        //when
+        assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();
+    }
+
+
+
+    @Test
+    void checkBalancedFalse5() {
+        //given
+        TreeNode<Integer> root = new TreeNode<>(null,
+                null,
+                new TreeNode(null, new TreeNode(), new TreeNode()));
+
+        //when
+        assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();
+    }
 }

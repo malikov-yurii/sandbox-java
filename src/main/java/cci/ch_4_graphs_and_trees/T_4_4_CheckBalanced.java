@@ -3,33 +3,22 @@ package cci.ch_4_graphs_and_trees;
 public class T_4_4_CheckBalanced {
 
     public static boolean checkBalanced(TreeNode node) {
-        return new BalancedCheck(node).check();
+        return getHeight(node) != Integer.MIN_VALUE;
     }
 
-    static class BalancedCheck {
-        int minDepth = Integer.MAX_VALUE;
-        int maxDepth = 0;
-        TreeNode root;
-
-        BalancedCheck(TreeNode root) {
-            this.root = root;
+    private static int getHeight(TreeNode node) {
+        if (node == null) {
+            return -1;
         }
-
-        public boolean check() {
-            return check(root, 1);
+        int leftHeight = getHeight(node.left);
+        if (leftHeight == Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
         }
-
-        private boolean check(TreeNode node, int depth) {
-            if (node == null) {
-                return true;
-            }
-            if (node.left != null || node.right != null) {
-                return check(node.left, depth + 1) && check(node.right, depth + 1);
-            }
-            minDepth = Math.min(depth, minDepth);
-            maxDepth = Math.max(depth, maxDepth);
-            return maxDepth - minDepth < 2;
+        int rightHeight = getHeight(node.right);
+        if (rightHeight == Integer.MIN_VALUE || Math.abs(leftHeight - rightHeight) > 1) {
+            return Integer.MIN_VALUE;
         }
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
 }
