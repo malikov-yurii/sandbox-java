@@ -16,10 +16,10 @@ class T_4_5_ValidateBinarySearchTreeTest {
     void shouldValidateBinarySearchTreeTrue() {
         //given
         TreeNode<Integer> root = T_4_2_MinSearchBinaryTreeFromSortedArray
-                .createBinarySearchTree(IntStream.range(0, 15).toArray());
+                .createBinarySearchTree(IntStream.range(0, 15000).toArray());
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isTrue();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isTrue();
     }
 
     @Test
@@ -30,7 +30,7 @@ class T_4_5_ValidateBinarySearchTreeTest {
         root.left.left.left.data = -1;
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isTrue();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isTrue();
     }
 
     @Test
@@ -41,7 +41,7 @@ class T_4_5_ValidateBinarySearchTreeTest {
         root.right.right.right.data = 100;
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isTrue();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isTrue();
     }
 
     @Test
@@ -52,7 +52,7 @@ class T_4_5_ValidateBinarySearchTreeTest {
         root.right.right.right.right = new TreeNode<>(100, null, null);
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isTrue();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isTrue();
     }
 
     @Test
@@ -63,7 +63,7 @@ class T_4_5_ValidateBinarySearchTreeTest {
         root.right.left.data = 77;
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isFalse();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isFalse();
     }
 
     @Test
@@ -74,7 +74,7 @@ class T_4_5_ValidateBinarySearchTreeTest {
         root.right.data = 2;
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isFalse();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isFalse();
     }
 
     @Test
@@ -85,7 +85,7 @@ class T_4_5_ValidateBinarySearchTreeTest {
         root.right.right.right.right = new TreeNode<>(14, null, null);
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isFalse();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isFalse();
     }
 
 
@@ -97,7 +97,7 @@ class T_4_5_ValidateBinarySearchTreeTest {
         root.right.right.right.data = 13;
 
         //then
-        assertThat(T_4_5_ValidateBinarySearchTree.isBST(root)).isFalse();
+        assertThat(T_4_5_ValidateBinarySearchTree.isBinarySearchTree(root)).isFalse();
     }
 
 }
