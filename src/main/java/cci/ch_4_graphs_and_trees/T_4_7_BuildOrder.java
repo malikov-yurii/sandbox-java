@@ -35,14 +35,14 @@ public class T_4_7_BuildOrder {
         for (GraphNode ordered : orderedNodes) {
             verifyQueue.addAll(projectDependants.get(ordered));
         }
-        while (!verifyQueue.isEmpty() && graph.size() >= orderedNodes.size()) {
+        while (!verifyQueue.isEmpty() && projects.length > orderedNodes.size()) {
             GraphNode verifyNode = verifyQueue.poll();
             if (orderedNodes.containsAll(verifyNode.getAdjacent())) {
                 orderedNodes.add(verifyNode);
                 verifyQueue.addAll(projectDependants.get(verifyNode));
             }
         }
-        if (graph.size() != orderedNodes.size()) {
+        if (projects.length != orderedNodes.size()) {
             throw new NoBuildOrderExistsException();
         }
         return orderedNodes.stream().map(GraphNode::getName).collect(Collectors.toList());

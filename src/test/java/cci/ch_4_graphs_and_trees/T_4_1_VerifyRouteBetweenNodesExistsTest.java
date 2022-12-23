@@ -26,8 +26,7 @@ class T_4_1_VerifyRouteBetweenNodesExistsTest {
         n3.setAdjacent(n1, n2, n5, n6, n7);
         n6.setAdjacent(n1, n2, n5, n6, n7);
 
-        Graph graph = new Graph();
-        graph.nodes = new GraphNode[]{n1, n2, n3, n4, n5, n6, n7, n8, n9};
+        Graph graph = new Graph(n1, n2, n3, n4, n5, n6, n7, n8, n9);
 
         assertThat(T_4_1_VerifyRouteBetweenNodesExists.verifyRouteExists(graph, n1, n9)).isTrue();
     }
