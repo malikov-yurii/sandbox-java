@@ -2,51 +2,49 @@ package cci.ch_4_graphs_and_trees;
 
 import exception.NoBuildOrderExistsException;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class T_4_7_BuildOrder {
 
-    public static List<String> buildOrder(String[] projects, ProjectDependency[] projectDependencies) {
-        Map<String, GraphNode> graph = new HashMap<>();
-        Map<GraphNode, List<GraphNode>> projectDependants = new LinkedHashMap<>();
-        for (String project : projects) {
-            GraphNode node = new GraphNode(project);
-            graph.put(project, node);
-            projectDependants.put(node, new LinkedList<>());
-        }
+    private final ProjectGraph graph;
+    private final List<String> buildOrder;
+    private final Queue<Project> verifyQueue;
 
-        Set<GraphNode> orderedNodes = new LinkedHashSet<>(graph.values());
-        for (ProjectDependency projectDependency : projectDependencies) {
-            GraphNode dependency = graph.get(projectDependency.dependency);
-            GraphNode project = graph.get(projectDependency.project);
-            project.addAdjacent(dependency);
-            orderedNodes.remove(project);
-            projectDependants.get(dependency).add(project);
+    private T_4_7_BuildOrder(String[] projects, ProjectDependency[] projectDependencies) {
+        graph = new ProjectGraph(projects, projectDependencies);
+        buildOrder = new LinkedList<>();
+        verifyQueue = new LinkedList<>();
+    }
+
+    public static List<String> buildOrder(String[] projects, ProjectDependency[] projectDependencies) {
+        return new T_4_7_BuildOrder(projects, projectDependencies).build();
+    }
+
+    private List<String> build() {
+        for (Project project : graph.getProjects()) {
+            checkReadyForBuild(project);
         }
-        Queue<GraphNode> verifyQueue = new LinkedList<>();
-        for (GraphNode ordered : orderedNodes) {
-            verifyQueue.addAll(projectDependants.get(ordered));
-        }
-        while (!verifyQueue.isEmpty() && projects.length > orderedNodes.size()) {
-            GraphNode verifyNode = verifyQueue.poll();
-            if (orderedNodes.containsAll(verifyNode.getAdjacent())) {
-                orderedNodes.add(verifyNode);
-                verifyQueue.addAll(projectDependants.get(verifyNode));
-            }
-        }
-        if (projects.length != orderedNodes.size()) {
+        if (buildOrder.isEmpty()) {
             throw new NoBuildOrderExistsException();
         }
-        return orderedNodes.stream().map(GraphNode::getName).collect(Collectors.toList());
+        while (!verifyQueue.isEmpty() && graph.getProjects().size() > buildOrder.size()) {
+            Project project = verifyQueue.poll();
+            checkReadyForBuild(project);
+        }
+        if (graph.getProjects().size() != buildOrder.size()) {
+            throw new NoBuildOrderExistsException();
+        }
+        return buildOrder;
+    }
 
+    private void checkReadyForBuild(Project project) {
+        if (project.isReadyForBuild()) {
+            buildOrder.add(project.getName());
+            project.setState(Project.State.BUILT);
+            verifyQueue.addAll(project.getChildren());
+        }
     }
 
 }

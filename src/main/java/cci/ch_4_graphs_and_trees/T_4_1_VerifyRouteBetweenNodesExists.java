@@ -6,7 +6,7 @@ import java.util.Queue;
 public class T_4_1_VerifyRouteBetweenNodesExists {
 
     public static boolean verifyRouteExists(Graph graph, GraphNode fromNode, GraphNode toNode) {
-        for (GraphNode node : graph.nodes) {
+        for (GraphNode node : graph.getNodes()) {
             node.setState(GraphNode.State.Unvisited);
         }
         Queue<GraphNode> queue = new LinkedList<>();

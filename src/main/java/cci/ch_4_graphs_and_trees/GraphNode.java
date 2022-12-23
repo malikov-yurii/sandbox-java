@@ -10,8 +10,8 @@ public class GraphNode {
     enum State { Unvisited, Visiting, Visited}
 
     private final String name;
-    private final List<GraphNode> adjacent = new ArrayList<>();
     private State state;
+    private final List<GraphNode> adjacent = new ArrayList<>();
 
     public GraphNode(String name, GraphNode... adjacent) {
         this.name = name;

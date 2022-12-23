@@ -8,7 +8,7 @@ import java.util.Queue;
 public class T_4_1_RouteBetweenNodes {
 
     public static GraphNode[] findRoute(Graph graph, GraphNode fromNode, GraphNode toNode) {
-        for (GraphNode n : graph.nodes) {
+        for (GraphNode n : graph.getNodes()) {
             n.setState(GraphNode.State.Unvisited);
         }
         GraphNode[] path = null;
