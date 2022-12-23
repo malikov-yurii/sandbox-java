@@ -1,16 +1,21 @@
 package cci.ch_4_graphs_and_trees;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class GraphNode {
 
     enum State { Unvisited, Visiting, Visited}
 
     private final String name;
-    private GraphNode[] adjacent;
+    private final List<GraphNode> adjacent = new ArrayList<>();
     private State state;
 
     public GraphNode(String name, GraphNode... adjacent) {
         this.name = name;
-        this.adjacent = adjacent;
+        this.adjacent.addAll(Arrays.asList(adjacent));
     }
 
     public String getName() {
@@ -25,12 +30,17 @@ public class GraphNode {
         this.state = state;
     }
 
-    public void setAdjacent(GraphNode... adjacent) {
-        this.adjacent = adjacent;
+    public void addAdjacent(GraphNode graphNode) {
+        this.adjacent.add(graphNode);
     }
 
-    public GraphNode[] getAdjacent() {
-        return adjacent == null ? new GraphNode[]{} : adjacent;
+    public void setAdjacent(GraphNode... adjacent) {
+        this.adjacent.clear();
+        this.adjacent.addAll(Arrays.asList(adjacent));
+    }
+
+    public List<GraphNode> getAdjacent() {
+        return Collections.unmodifiableList(adjacent);
     }
 
     @Override
