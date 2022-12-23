@@ -13,11 +13,11 @@ public class T_4_2_MinSearchBinaryTreeFromSortedArray {
             int middle = (start + end) / 2;
             root.data = arr[middle];
             if (start < middle) {
-                root.left = new TreeNode<>();
+                root.setLeft(new TreeNode<>());
                 createSearchTree(root.left, start, middle, arr);
             }
             if (middle + 1 < end) {
-                root.right = new TreeNode<>();
+                root.setRight(new TreeNode<>());
                 createSearchTree(root.right, middle + 1, end, arr);
             }
         }
