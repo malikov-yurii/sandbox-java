@@ -1,64 +1,68 @@
 package cci.ch_4_graphs_and_trees;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class T_4_9_BSTSequences {
 
     public static List<LinkedList<Integer>> getSequences(TreeNode<Integer> node) {
-        if (node == null) {
-            return new LinkedList<>();
-        }
-        List<LinkedList<Integer>> weave = weave(getSequences(node.left), getSequences(node.right));
-        weave.forEach(list -> list.addFirst(node.data));
-        return weave;
+        LinkedList<LinkedList<Integer>> sequences = new LinkedList<>();
+        addSequences(node, sequences);
+        return sequences;
     }
 
-    private static List<LinkedList<Integer>> weave(List<LinkedList<Integer>> lists1,
-                                                   List<LinkedList<Integer>> lists2) {
-        List<LinkedList<Integer>> weave = new LinkedList<>();
+    private static void addSequences(TreeNode<Integer> node, LinkedList<LinkedList<Integer>> result) {
+        if (node == null) {
+            return;
+        }
+        List<LinkedList<Integer>> leftSequences = getSequences(node.left);
+        List<LinkedList<Integer>> rightSequences = getSequences(node.right);
+        weaveLists(leftSequences, rightSequences, result);
+        result.forEach(list -> list.addFirst(node.data));
+    }
+
+    private static void weaveLists(List<LinkedList<Integer>> lists1,
+                                   List<LinkedList<Integer>> lists2,
+                                   List<LinkedList<Integer>> result) {
         if (lists1.isEmpty() && lists2.isEmpty()) {
-            weave.add(new LinkedList<>());
+            result.add(new LinkedList<>());
         } else if (lists1.isEmpty()) {
-            weave.addAll(lists2);
+            result.addAll(lists2);
         } else if (lists2.isEmpty()) {
-            weave.addAll(lists1);
+            result.addAll(lists1);
         } else {
             for (LinkedList<Integer> list1 : lists1) {
                 for (LinkedList<Integer> list2 : lists2) {
-                    weave.addAll(weaveTwoLists(list1, list2, new LinkedList<>()));
+                    weaveTwoLists(list1, list2, new LinkedList<>(), result);
                 }
             }
         }
-        return weave;
     }
 
-    static List<LinkedList<Integer>> weaveTwoLists(LinkedList<Integer> first,
-                                                   LinkedList<Integer> second,
-                                                   LinkedList<Integer> prefix) {
-        ArrayList<LinkedList<Integer>> weave = new ArrayList<>();
+    static void weaveTwoLists(LinkedList<Integer> first,
+                              LinkedList<Integer> second,
+                              LinkedList<Integer> prefix,
+                              List<LinkedList<Integer>> result) {
         if (first.isEmpty() || second.isEmpty()) {
-            LinkedList<Integer> result = new LinkedList<>(prefix);
-            result.addAll(first);
-            result.addAll(second);
-            weave.add(result);
+            LinkedList<Integer> list = new LinkedList<>(prefix);
+            list.addAll(first);
+            list.addAll(second);
+            result.add(list);
         } else {
-            weave.addAll(moveToPrefixAndWeave(first, second, prefix));
-            weave.addAll(moveToPrefixAndWeave(second, first, prefix));
+            moveToPrefixAndWeave(first, second, prefix, result);
+            moveToPrefixAndWeave(second, first, prefix, result);
         }
-        return weave;
     }
 
-    private static List<LinkedList<Integer>> moveToPrefixAndWeave(LinkedList<Integer> splitList,
-                                                                  LinkedList<Integer> remainingList,
-                                                                  LinkedList<Integer> prefixList) {
+    private static void moveToPrefixAndWeave(LinkedList<Integer> splitList,
+                                             LinkedList<Integer> remainingList,
+                                             LinkedList<Integer> prefixList,
+                                             List<LinkedList<Integer>> result) {
         Integer element = splitList.removeFirst();
         prefixList.addLast(element);
-        List<LinkedList<Integer>> weave = weaveTwoLists(splitList, remainingList, prefixList);
+        weaveTwoLists(splitList, remainingList, prefixList, result);
         prefixList.removeLast();
         splitList.addFirst(element);
-        return weave;
     }
 
 }

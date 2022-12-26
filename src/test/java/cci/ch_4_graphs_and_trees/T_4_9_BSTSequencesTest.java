@@ -2,6 +2,7 @@ package cci.ch_4_graphs_and_trees;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,7 +85,8 @@ class T_4_9_BSTSequencesTest {
         LinkedList<Integer> list1 = newLinkedList(1, 2);
         LinkedList<Integer> list2 = newLinkedList(3, 4);
 
-        List<LinkedList<Integer>> resultLists = T_4_9_BSTSequences.weaveTwoLists(list1, list2, prefix);
+        List<LinkedList<Integer>> resultLists = new ArrayList<>();
+        T_4_9_BSTSequences.weaveTwoLists(list1, list2, prefix, resultLists);
 
         assertThat(resultLists).containsAll(Arrays.asList(
                 newLinkedList(-1, 0, 1, 2, 3, 4),
