@@ -2,7 +2,7 @@ package cci.ch_4_graphs_and_trees;
 
 public class T_4_6_Successor {
 
-    public static <T> TreeNode<T> findSuccessor(TreeNode<T> node) {
+    public static <T extends Comparable<T>> TreeNode<T> findSuccessor(TreeNode<T> node) {
         TreeNode<T> result = null;
         if (node.right != null) {
             result = node.right;

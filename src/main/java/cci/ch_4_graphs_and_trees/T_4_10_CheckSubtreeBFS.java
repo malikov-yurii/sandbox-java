@@ -8,7 +8,7 @@ import java.util.Queue;
 
 public class T_4_10_CheckSubtreeBFS {
 
-    public static <T> boolean containsSubtree(TreeNode<T> bigTree, TreeNode<T> smallTree) {
+    public static <T extends Comparable<T>> boolean checkSubtree(TreeNode<T> bigTree, TreeNode<T> smallTree) {
         if (smallTree == null) {
             return true;
         }
@@ -29,7 +29,7 @@ public class T_4_10_CheckSubtreeBFS {
         return false;
     }
 
-    private static <T> boolean treeEquals(TreeNode<T> n1, TreeNode<T> n2) {
+    private static <T extends Comparable<T>> boolean treeEquals(TreeNode<T> n1, TreeNode<T> n2) {
         Queue<Pair<TreeNode<T>, TreeNode<T>>> queue = new LinkedList<>();
         queue.offer(Pair.of(n1, n2));
         while (!queue.isEmpty()) {

@@ -32,8 +32,8 @@ class T_4_4_CheckBalancedTest {
     void checkBalancedTrue2() {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
-                new TreeNode(),
-                new TreeNode(null, new TreeNode(), null));
+                new TreeNode<>(),
+                new TreeNode<>(null, new TreeNode<>(), null));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isTrue();
@@ -43,8 +43,8 @@ class T_4_4_CheckBalancedTest {
     void checkBalancedTrue4() {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
-                new TreeNode(),
-                new TreeNode(null, new TreeNode(), new TreeNode()));
+                new TreeNode<>(),
+                new TreeNode<>(null, new TreeNode<>(), new TreeNode<>()));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isTrue();
@@ -54,8 +54,8 @@ class T_4_4_CheckBalancedTest {
     void checkBalancedTrue5() {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
-                new TreeNode(null, new TreeNode(), null),
-                new TreeNode(null, new TreeNode(), new TreeNode(null, null, new TreeNode())));
+                new TreeNode<>(null, new TreeNode<>(), null),
+                new TreeNode<>(null, new TreeNode<>(), new TreeNode<>(null, null, new TreeNode<>())));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isTrue();
@@ -65,8 +65,8 @@ class T_4_4_CheckBalancedTest {
     void checkBalancedFalse1() {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
-                new TreeNode(),
-                new TreeNode(null, null, new TreeNode(null, null, new TreeNode())));
+                new TreeNode<>(),
+                new TreeNode<>(null, null, new TreeNode<>(null, null, new TreeNode<>())));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();
@@ -77,8 +77,8 @@ class T_4_4_CheckBalancedTest {
     void checkBalancedFalse2() {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
-                new TreeNode(),
-                new TreeNode(null, new TreeNode(), new TreeNode(null, null, new TreeNode())));
+                new TreeNode<>(),
+                new TreeNode<>(null, new TreeNode<>(), new TreeNode<>(null, null, new TreeNode<>())));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();
@@ -88,8 +88,8 @@ class T_4_4_CheckBalancedTest {
     void checkBalancedFalse3() {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
-                new TreeNode(null, new TreeNode(null, null, new TreeNode()), null),
-                new TreeNode(null, new TreeNode(null, new TreeNode(null, new TreeNode(null, null, new TreeNode()), new TreeNode()), new TreeNode()), null));
+                new TreeNode<>(null, new TreeNode<>(null, null, new TreeNode<>()), null),
+                new TreeNode<>(null, new TreeNode<>(null, new TreeNode<>(null, new TreeNode<>(null, null, new TreeNode<>()), new TreeNode<>()), new TreeNode<>()), null));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();
@@ -100,7 +100,7 @@ class T_4_4_CheckBalancedTest {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
                 null,
-                new TreeNode(null, null, new TreeNode()));
+                new TreeNode<>(null, null, new TreeNode<>()));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();
@@ -113,7 +113,7 @@ class T_4_4_CheckBalancedTest {
         //given
         TreeNode<Integer> root = new TreeNode<>(null,
                 null,
-                new TreeNode(null, new TreeNode(), new TreeNode()));
+                new TreeNode<>(null, new TreeNode<>(), new TreeNode<>()));
 
         //when
         assertThat(T_4_4_CheckBalanced.checkBalanced(root)).isFalse();

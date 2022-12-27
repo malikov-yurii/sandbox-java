@@ -22,7 +22,7 @@ class T_4_10_CheckSubtreeBFSTest {
                 .createBinarySearchTree(IntStream.range(8, 11).toArray());
 
         //then
-        assertThat(T_4_10_CheckSubtreeBFS.containsSubtree(bigRoot, smallRoot)).isTrue();
+        assertThat(T_4_10_CheckSubtreeBFS.checkSubtree(bigRoot, smallRoot)).isTrue();
     }
 
     /*                       7
@@ -39,7 +39,7 @@ class T_4_10_CheckSubtreeBFSTest {
                 .createBinarySearchTree(IntStream.range(8, 15).toArray());
 
         //then
-        assertThat(T_4_10_CheckSubtreeBFS.containsSubtree(bigRoot, smallRoot)).isTrue();
+        assertThat(T_4_10_CheckSubtreeBFS.checkSubtree(bigRoot, smallRoot)).isTrue();
     }
 
     /*                       7
@@ -56,7 +56,7 @@ class T_4_10_CheckSubtreeBFSTest {
                 .createBinarySearchTree(IntStream.range(0, 7).toArray());
 
         //then
-        assertThat(T_4_10_CheckSubtreeBFS.containsSubtree(bigRoot, smallRoot)).isTrue();
+        assertThat(T_4_10_CheckSubtreeBFS.checkSubtree(bigRoot, smallRoot)).isTrue();
     }
 
     /*                       7
@@ -73,7 +73,7 @@ class T_4_10_CheckSubtreeBFSTest {
                 .createBinarySearchTree(IntStream.range(0, 8).toArray());
 
         //then
-        assertThat(T_4_10_CheckSubtreeBFS.containsSubtree(bigRoot, smallRoot)).isFalse();
+        assertThat(T_4_10_CheckSubtreeBFS.checkSubtree(bigRoot, smallRoot)).isFalse();
     }
 
     /*                       7
@@ -90,7 +90,7 @@ class T_4_10_CheckSubtreeBFSTest {
                 .createBinarySearchTree(IntStream.range(2, 6).toArray());
 
         //then
-        assertThat(T_4_10_CheckSubtreeBFS.containsSubtree(bigRoot, smallRoot)).isFalse();
+        assertThat(T_4_10_CheckSubtreeBFS.checkSubtree(bigRoot, smallRoot)).isFalse();
     }
 
     /*                       7
@@ -107,7 +107,7 @@ class T_4_10_CheckSubtreeBFSTest {
                 .createBinarySearchTree(new int[] {1, 3, 5});
 
         //then
-        assertThat(T_4_10_CheckSubtreeBFS.containsSubtree(bigRoot, smallRoot)).isFalse();
+        assertThat(T_4_10_CheckSubtreeBFS.checkSubtree(bigRoot, smallRoot)).isFalse();
     }
 
     /*                       7
@@ -124,7 +124,7 @@ class T_4_10_CheckSubtreeBFSTest {
                 .createBinarySearchTree(new int[] {3, 7, 11});
 
         //then
-        assertThat(T_4_10_CheckSubtreeBFS.containsSubtree(bigRoot, smallRoot)).isFalse();
+        assertThat(T_4_10_CheckSubtreeBFS.checkSubtree(bigRoot, smallRoot)).isFalse();
     }
 
 
