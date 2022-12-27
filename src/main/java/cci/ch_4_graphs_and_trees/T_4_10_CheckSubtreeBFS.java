@@ -6,9 +6,9 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
-public class T_4_10_CheckSubtree {
+public class T_4_10_CheckSubtreeBFS {
 
-    public static <T> boolean checkSubtree(TreeNode<T> bigTree, TreeNode<T> smallTree) {
+    public static <T> boolean containsSubtree(TreeNode<T> bigTree, TreeNode<T> smallTree) {
         if (smallTree == null) {
             return true;
         }
@@ -46,6 +46,5 @@ public class T_4_10_CheckSubtree {
         }
         return true;
     }
-
 
 }
