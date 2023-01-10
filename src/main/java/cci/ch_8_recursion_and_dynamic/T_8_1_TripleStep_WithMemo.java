@@ -16,14 +16,14 @@ public class T_8_1_TripleStep_WithMemo {
 
     private static int countPaths(int n, int[] memo) {
         visits++;
-        if (memo[n] != 0) {
-            return memo[n];
+        if (n < 0) {
+            return 0;
         }
         if (n == 0) {
             return 1;
         }
-        if (n < 3) {
-            return n;
+        if (memo[n] != 0) {
+            return memo[n];
         }
         memo[n] = countPaths(n - 1, memo) + countPaths(n - 2, memo) + countPaths(n - 3, memo);
         return memo[n];
