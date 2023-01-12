@@ -13,11 +13,11 @@ class T_8_4_PowerSetTest {
 
     @Test
     void getAllSubsets() {
-
         List<Set<Integer>> subsets = T_8_4_PowerSet.getAllSubsets(new HashSet<>(Arrays.asList(1, 2, 3, 4)));
         subsets.forEach(System.out::println);
-        assertThat(subsets.size()).isEqualTo(15);
+        assertThat(subsets.size()).isEqualTo(16);
         assertThat(subsets).contains(
+                new HashSet<>(),
                 new HashSet<>(Arrays.asList(1)),
                 new HashSet<>(Arrays.asList(2)),
                 new HashSet<>(Arrays.asList(1, 2)),

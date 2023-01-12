@@ -9,12 +9,12 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class T_8_4_PowerSet_BinarySolutionTest {
+class T_8_4_PowerSet_Recursive2Test {
 
     @Test
     void getAllSubsets() {
         List<Integer> nums = Arrays.asList(1, 2, 3, 4);
-        List<Set<Integer>> subsets = T_8_4_PowerSet_BinarySolution.getAllSubsets(nums);
+        List<Set<Integer>> subsets = T_8_4_PowerSet_Recursive2.getAllSubsets(new HashSet<>(nums));
         subsets.forEach(System.out::println);
         assertThat(subsets.size()).isEqualTo(1 << nums.size());
         assertThat(subsets).contains(
@@ -33,7 +33,7 @@ class T_8_4_PowerSet_BinarySolutionTest {
                 new HashSet<>(Arrays.asList(3, 4)),
                 new HashSet<>(Arrays.asList(1, 3, 4)),
                 new HashSet<>(Arrays.asList(2, 3, 4)),
-                new HashSet<>(Arrays.asList(1, 2, 3, 4))
+                new HashSet<>(nums)
         );
 
     }

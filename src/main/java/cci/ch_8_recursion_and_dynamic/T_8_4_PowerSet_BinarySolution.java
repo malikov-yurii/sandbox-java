@@ -13,7 +13,7 @@ public class T_8_4_PowerSet_BinarySolution {
 
     public static List<Set<Integer>> getAllSubsets(List<Integer> nums) {
         List<Set<Integer>> sets = new ArrayList<>();
-        for (int i = 1; i < 1 << nums.size(); i++) {
+        for (int i = 0; i < 1 << nums.size(); i++) {
             Set<Integer> newSet = new HashSet<>();
             sets.add(newSet);
             for (int j = 0, n = i; n > 0; j++, n >>= 1) {

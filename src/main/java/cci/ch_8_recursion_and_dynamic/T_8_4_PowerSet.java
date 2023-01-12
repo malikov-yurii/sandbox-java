@@ -1,32 +1,22 @@
 package cci.ch_8_recursion_and_dynamic;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.util.stream.Collectors.toList;
+
 public class T_8_4_PowerSet {
 
-    public static List<Set<Integer>> getAllSubsets(Set<Integer> set) {
+    public static List<Set<Integer>> getAllSubsets(Set<Integer> nums) {
         List<Set<Integer>> subSets = new ArrayList<>();
-        for (Integer val : set) {
-            subSets.addAll(getAllSubsets(val, subSets));
+        subSets.add(new HashSet<>());
+        for (Integer n : nums) {
+            List<HashSet<Integer>> newSets = subSets.stream().map(HashSet::new).peek(s -> s.add(n)).collect(toList());
+            subSets.addAll(newSets);
         }
         return subSets;
-    }
-
-    private static Collection<? extends Set<Integer>> getAllSubsets(Integer val, List<Set<Integer>> sets) {
-        List<Set<Integer>> newSets = new ArrayList<>();
-        Set<Integer> newSet = new HashSet<>();
-        newSet.add(val);
-        newSets.add(newSet);
-        for (Set<Integer> set: sets) {
-            newSet = new HashSet<>(set);
-            newSet.add(val);
-            newSets.add(newSet);
-        }
-        return newSets;
     }
 
 }
