@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-public class T_8_8_PermutationsWithDups { /* TODO Impl this 8_7 with Set to avoid many String creation? */
+public class T_8_8_PermutationsWithDups {
 
     public static List<String> getPermutations(String str) {
         Map<Character, Integer> charCounts = new HashMap<>();
