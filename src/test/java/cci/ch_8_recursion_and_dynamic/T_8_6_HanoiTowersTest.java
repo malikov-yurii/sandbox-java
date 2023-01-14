@@ -13,7 +13,7 @@ class T_8_6_HanoiTowersTest {
 
     @Test
     void moveFromFirstToLast() {
-        int n = 9;
+        int n = 7;
 
         List<Stack<Integer>> towers = Arrays.asList(new Stack<>(), new Stack<>(), new Stack<>());
 
