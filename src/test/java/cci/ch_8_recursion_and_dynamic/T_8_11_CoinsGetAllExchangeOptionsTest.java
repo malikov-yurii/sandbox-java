@@ -7,11 +7,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class T_8_11_CoinsTest {
+class T_8_11_CoinsGetAllExchangeOptionsTest {
 
     @Test
     void getExchangeOptions4() {
-        List<int[]> options = T_8_11_Coins.getExchangeOptions(4);
+        List<int[]> options = T_8_11_Coins_GetAllChangeOptions.getExchangeOptions(4);
         options.forEach(opt -> System.out.println(Arrays.toString(opt)));
         assertThat(options).containsExactlyInAnyOrder(
                 new int[]{0, 0, 0, 4}
@@ -20,7 +20,7 @@ class T_8_11_CoinsTest {
 
     @Test
     void getExchangeOptions6() {
-        List<int[]> options = T_8_11_Coins.getExchangeOptions(6);
+        List<int[]> options = T_8_11_Coins_GetAllChangeOptions.getExchangeOptions(6);
         options.forEach(opt -> System.out.println(Arrays.toString(opt)));
         assertThat(options).containsExactlyInAnyOrder(
                 new int[]{0, 0, 0, 6},
@@ -30,7 +30,7 @@ class T_8_11_CoinsTest {
 
     @Test
     void getExchangeOptions12() {
-        List<int[]> options = T_8_11_Coins.getExchangeOptions(12);
+        List<int[]> options = T_8_11_Coins_GetAllChangeOptions.getExchangeOptions(12);
         options.forEach(opt -> System.out.println(Arrays.toString(opt)));
         assertThat(options).containsExactlyInAnyOrder(
                 new int[]{0, 0, 0, 12},

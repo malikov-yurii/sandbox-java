@@ -3,7 +3,7 @@ package cci.ch_8_recursion_and_dynamic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class T_8_11_Coins {
+public class T_8_11_Coins_GetAllChangeOptions {
 
     public static List<int[]> getExchangeOptions(int cents) {
         ArrayList<int[]> options = new ArrayList<>();
