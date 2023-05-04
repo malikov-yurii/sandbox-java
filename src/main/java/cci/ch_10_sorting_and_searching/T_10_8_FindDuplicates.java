@@ -7,12 +7,12 @@ public class T_10_8_FindDuplicates {
 
     public static int[] findDups(int[] arr) {
         Set<Integer> dups = new HashSet<>();
-        BitMap bitMap = new BitMap(32000);
+        BitSet bitSet = new BitSet(32000);
         for (int j : arr) {
-            if (bitMap.contains(j)) {
+            if (bitSet.get(j)) {
                 dups.add(j);
             } else {
-                bitMap.add(j);
+                bitSet.set(j);
             }
         }
         return dups.stream().mapToInt(Integer::intValue).toArray();
