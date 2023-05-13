@@ -3,29 +3,24 @@ package cci.ch_10_sorting_and_searching;
 public class BitSet {
 
     public static final int ADDRESS_BITS_PER_WORD = 5;
-    public static final int BITS_PER_WORD = 1 << ADDRESS_BITS_PER_WORD;
     private final int[] words;
 
     public BitSet(int maxValue) {
-        words = new int[maxValue >> ADDRESS_BITS_PER_WORD + 1];
+        words = new int[(maxValue >> ADDRESS_BITS_PER_WORD) + 1];
     }
 
-    public boolean get(int val) {
-        int wordInd = getWordIndex(val);
-        return (words[wordInd] & getMask(val)) != 0;
+    public boolean get(int i) {
+        int wordInd = getWordIndex(i);
+        return (words[wordInd] & (1 << i)) != 0;
     }
 
-    public void set(int val) {
-        int bucketId = val / BITS_PER_WORD;
-        words[bucketId] |= getMask(val);
+    public void set(int i) {
+        int wordInd = getWordIndex(i);
+        words[wordInd] |= 1 << i;
     }
 
     private static int getWordIndex(int val) {
-        return val >> ADDRESS_BITS_PER_WORD - 1;
-    }
-
-    private static int getMask(int val) {
-        return 1 << (val & 0x1F);
+        return val >> ADDRESS_BITS_PER_WORD;
     }
 }
 /*
